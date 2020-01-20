@@ -1,0 +1,65 @@
+body {
+    overflow-x: hidden;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.navbar .nav-link {
+    font-size: 18px;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+
+}
+
+.navbar .nav-item.active {
+    border-left: rgb(151, 145, 145) 2px solid;
+}
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
+}
+.navbar-brand {
+    font-size: 24px;
+    font-family: 'Wowi Typeface';
+}
+.footer {
+    background-color: #fff;
+    box-shadow: 0 -.5rem 1rem rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    text-align: center;
+}
+.dark-overlay a {
+    text-decoration: none;
+    color: #fff;
+}
+.content {
+    background-image: url("../images/WallpapersHD (35).jpg");
+    height: 70vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center -100px;
+}
+h1 {
+    padding-top: 15%;
+}
+.btn {
+    background-color: #48273b;
+    color: #fff;
+}
+.frame {
+    margin: -6% 15% 1% 15%;
+    background-color: #48273b;
+    color: #fff;
+    padding: 45px 0 45px 16px;
+    border-radius: 10px;
+}
+.line {
+    border-left: 2px #999 solid;
+}
+.image {
+    background-image: url("../images/WallpapersHD (167).jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 2rem 0;
+}

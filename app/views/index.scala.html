@@ -1,6 +1,115 @@
 @this(webJarsUtil: org.webjars.play.WebJarsUtil)
 @()
 @import views.html.main
-@main("Index", webJarsUtil) {
-  <h1 class="text-center text-success" style="font-size: 10em">Welcome to our Project <br> Leaderboard</h1>
+@main("Home Page", webJarsUtil) {
+
+
+
+    <body>
+      <div class="dark-overlay bg-dark text-right py-1">
+        <div class="container-fluid">
+          <a href="https://www.google.com"><i class="fab fa-google-plus fa-2x"></i></a>
+          <a href="https://www.youtube.com"><i class="fab fa-youtube fa-2x"></i></a>
+          <a href="https://www.twitter.com"><i class="fab fa-twitter fa-2x"></i></a>
+          <a href="https://www.facebook.com"><i class="fab fa-facebook fa-2x"></i></a>
+          <a href="https://www.pinterest.com"><i class="fab fa-pinterest fa-2x"></i></a>
+        </div>
+      </div>
+
+      <nav class="navbar navbar-expand-sm navbar-light py-3">
+        <div class="container mx-5">
+          <a href="index.scala.html" class="navbar-brand"><strong>Scala Coders Team</strong></a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="index.scala.html" class="nav-link active">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">PAGES</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">BLOG</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">GALLERY</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">TEAM</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">SERVICES</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">CONTACT</a>
+              </li>
+            </ul>
+          </div>
+          <i class="fas fa-search ml-3" style="border-left: 2px #777 solid; padding-left: 10px;"></i>
+        </div>
+      </nav>
+      <div class="content text-white text-center">
+        <div class="container">
+          <h1>Welcome to Scala Coders Team Project</h1>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Aliquid impedit similique nisi ab amet minima corrupti earum
+            assumenda veniam sequi cumque, blanditiis dolorem beatae magnam.
+          </p>
+          <button class="btn">Details</button>
+        </div>
+      </div>
+      <div class="frame text-center">
+        <div class="row">
+          <div class="col-md-3">
+            <i class="fas fa-gavel fa-3x"></i>
+            <h3>Get Legal Advice</h3>
+          </div>
+          <div class="col-md-3 line">
+            <i class="fas fa-user fa-3x"></i>
+            <h3>Expert Lawyer</h3>
+          </div>
+          <div class="col-md-3 line">
+            <i class="fab fa-btc fa-3x"></i>
+            <h3>Low Cost</h3>
+          </div>
+          <div class="col-md-3 line">
+            <i class="fas fa-paste fa-3x"></i>
+            <h3>Case Study</h3>
+          </div>
+        </div>
+      </div>
+      <div class="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 py-5">
+              <h2>About Us</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptas laborum beatae numquam autem optio dolore mollitia accusantium blanditiis,
+                obcaecati modi itaque natus qui odio deleniti animi earum nisi sint esse
+                quidem molestias praesentium temporibus repudiandae.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptas laborum beatae numquam autem optio dolore mollitia accusantium blanditiis,
+                obcaecati modi itaque natus qui odio deleniti animi earum nisi sint esse
+                quidem molestias praesentium temporibus repudiandae.
+              </p>
+            </div>
+            <div class="col-md-6 image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <p>Scala Coders Team &copy 2020 All Right Reserved</p>
+      </footer>
+
+    </body>
+
+
 }

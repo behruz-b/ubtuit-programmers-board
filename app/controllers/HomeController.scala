@@ -13,7 +13,10 @@ import scala.concurrent.duration.DurationInt
 @Singleton
 class HomeController @Inject()(val controllerComponents: ControllerComponents,
                                   implicit val webJarsUtil: WebJarsUtil,
-                                  indexTemplate: index
+                                  indexTemplate: index,
+                                  performersTemplate: performers,
+                                  adminTemplate: admin,
+                                  registerTemplate: register
                               )
                                  (implicit val ec: ExecutionContext)
   extends BaseController with LazyLogging {
@@ -23,5 +26,13 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents,
   def index = Action {
     Ok(indexTemplate())
   }
-
+  def performers = Action {
+    Ok(performersTemplate())
+  }
+  def admin = Action {
+    Ok(adminTemplate())
+  }
+  def register = Action {
+    Ok(registerTemplate())
+  }
 }

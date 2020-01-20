@@ -1,0 +1,38 @@
+@this(webJarsUtil: org.webjars.play.WebJarsUtil)
+@()
+@import views.html.main
+@main("Register Page", webJarsUtil) {
+
+    <div class="body">
+        <div class="containerfixed">
+            <div class="login">
+                <div class="containerfixed">
+                    <h1>Log in</h1>
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password"><br>
+                    <input type="checkbox"><span>Remember me</span>
+                    <a href="#">Forgot password?</a>
+                    <button>log in</button>
+                    <hr><p>Or Connect With</p><hr>
+                    <ul>
+                        <li><i class="fab fa-facebook-f fa-2x"></i></li>
+                        <li><i class="fab fa-twitter fa-2x"></i></li>
+                        <li><i class="fab fa-github fa-2x"></i></li>
+                        <li><i class="fab fa-linkedin-in fa-2x"></i></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <span class="copyright">Scala Coders Team &copy;2020 All Right Reserved</span>
+                </div>
+            </div>
+            <div class="register">
+                <div class="containerfixed">
+                    <i class="fas fa-user-plus fa-5x"></i>
+                    <h2>Hello,friend!</h2>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button>Register <i class="fas fa-arrow-circle-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

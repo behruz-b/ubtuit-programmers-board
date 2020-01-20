@@ -1,5 +1,4 @@
 GET     /                           controllers.HomeController.index
-GET     /performers                 controllers.HomeController.performers
 GET     /admin                      controllers.HomeController.admin
 GET     /register                   controllers.HomeController.register
 

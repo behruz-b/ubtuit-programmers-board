@@ -14,7 +14,6 @@ import scala.concurrent.duration.DurationInt
 class HomeController @Inject()(val controllerComponents: ControllerComponents,
                                   implicit val webJarsUtil: WebJarsUtil,
                                   indexTemplate: index,
-                                  performersTemplate: performers,
                                   adminTemplate: admin,
                                   registerTemplate: register
                               )
@@ -25,9 +24,6 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents,
 
   def index = Action {
     Ok(indexTemplate())
-  }
-  def performers = Action {
-    Ok(performersTemplate())
   }
   def admin = Action {
     Ok(adminTemplate())

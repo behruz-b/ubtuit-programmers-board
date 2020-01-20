@@ -2,6 +2,57 @@
 @()
 @import views.html.main
 @main("Profile", webJarsUtil) {
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/profile.css")">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 text-center  bg-primary">
+        <div class="row">
+          <div class="offset-md-1 col-md-10">
+            <img src="@routes.Assets.versioned("images/person4.jpg")" alt="" class="rounded-circle text-center img-fluid">
+          </div>
+        </div>
 
+        <ul class="menu text-white">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Experience</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Skills</a></li>
+          <li><a href="#">Awards</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
 
+      </div>
+      <div class="col-md-10 main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <p id="fullName">
+                <span class="name"><strong>Johndon</strong></span><span
+              class="surname text-primary"><strong>Bonsen</strong></span>
+              </p>
+              <h6>The next big idea is waiting for its next big changer with <span class="text-primary">themsbit</span>
+              </h6>
+              <p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Ab consequuntur officiis, commodi deserunt nobis illo ratione hic
+                laudantium accusantium? Facere incidunt magnam quasi repellendus nisi,
+                voluptates fuga enim doloremque soluta culpa ad assumenda commodi ab.
+              </p>
+              <div class="brands">
+                <a href="https://www.facebook.com"><i class="fab fa-facebook fa-2x text-dark"></i></a>
+                <a href="https://www.twitter.com"><i class="fab fa-twitter fa-2x text-dark"></i></a>
+                <a href="https://www.telegram.me"><i class="fab fa-telegram fa-2x text-dark"></i></a>
+                <a href="https://www.github.com"><i class="fab fa-github fa-2x text-dark"></i></a>
+                <a href="https://www.skype.com"><i class="fab fa-skype fa-2x text-dark"></i></a>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <img src="@routes.Assets.versioned("images/gentleman.png")" alt="" class="img-fluid gantleman">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 }

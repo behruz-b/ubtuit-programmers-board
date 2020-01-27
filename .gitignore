@@ -1,6 +1,5 @@
 logs/application.log
-project/project
-project/target
+project
 target
 tmp
 .history

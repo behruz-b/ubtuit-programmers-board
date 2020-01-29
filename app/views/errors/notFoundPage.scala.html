@@ -1,0 +1,27 @@
+@this(webJarsUtil: org.webjars.play.WebJarsUtil)
+@()
+@import views.html.main
+@main("Page note found", webJarsUtil) {
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/error/error.css")">
+  <div id="notfound">
+    <div class="notfound">
+      <div class="notfound-404">
+        <h1>Oops!</h1>
+      </div>
+      <h2>404 - Page not found</h2>
+      <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+      <a href="#">Go To Homepage</a>
+    </div>
+  </div>
+  <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+
+          gtag('js', new Date());
+
+          gtag('config', 'UA-23581568-13');
+  </script>
+}

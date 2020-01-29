@@ -2,11 +2,9 @@
 @()
 @import views.html.main
 @main("Home Page", webJarsUtil) {
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/index/index.css")">
 
-
-
-    <body>
-      <nav class="navbar navbar-expand-sm navbar-light py-3">
+  <nav class="navbar navbar-expand-sm navbar-light py-3">
         <div class="container mx-5">
           <a href="index.scala.html" class="navbar-brand"><strong>Scala Coders Team</strong></a>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -67,7 +65,8 @@
           </div>
           <div class="col-md-3 line">
             <i class="fas fa-paste fa-3x"></i>
-            <h3>Case Study</h3>
+            <h3>Case Study</h3>      <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/home_page.css")">
+
           </div>
         </div>
       </div>
@@ -288,8 +287,5 @@
       <footer class="footer">
         <p>Scala Coders Team &copy 2020 All Right Reserved</p>
       </footer>
-
-    </body>
-
 
 }

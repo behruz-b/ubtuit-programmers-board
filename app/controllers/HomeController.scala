@@ -6,6 +6,7 @@ import javax.inject._
 import org.webjars.play.WebJarsUtil
 import play.api.mvc._
 import views.html._
+import views.html.errors.notFoundPage
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.DurationInt
@@ -16,7 +17,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents,
                                   indexTemplate: index,
                                   adminTemplate: admin,
                                   registerTemplate: register,
-                                  profileTemplate: profile
+                                  profileTemplate: profile,
+                                  errorTemplate: notFoundPage
                               )
                                  (implicit val ec: ExecutionContext)
   extends BaseController with LazyLogging {
@@ -35,5 +37,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents,
   }
   def profile = Action {
     Ok(profileTemplate())
+  }
+  def notFund = Action {
+    Ok(errorTemplate())
   }
 }

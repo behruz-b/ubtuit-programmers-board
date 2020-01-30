@@ -5113,7 +5113,7 @@ deaf:
     terms:
       - ear
       - hearing
-      - sign language
+      - sign computerLanguage
   styles:
     - solid
   unicode: f2a4
@@ -8202,7 +8202,7 @@ globe:
       - earth
       - global
       - gps
-      - language
+      - computerLanguage
       - localize
       - location
       - map
@@ -8227,7 +8227,7 @@ globe-africa:
       - earth
       - global
       - gps
-      - language
+      - computerLanguage
       - localize
       - location
       - map
@@ -8252,7 +8252,7 @@ globe-americas:
       - earth
       - global
       - gps
-      - language
+      - computerLanguage
       - localize
       - location
       - map
@@ -8277,7 +8277,7 @@ globe-asia:
       - earth
       - global
       - gps
-      - language
+      - computerLanguage
       - localize
       - location
       - map
@@ -8302,7 +8302,7 @@ globe-europe:
       - earth
       - global
       - gps
-      - language
+      - computerLanguage
       - localize
       - location
       - map

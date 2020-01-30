@@ -1,7 +1,7 @@
 accessibility:
   icons:
     - accessible-icon
-    - american-sign-language-interpreting
+    - american-sign-computerLanguage-interpreting
     - assistive-listening-systems
     - audio-description
     - blind
@@ -11,7 +11,7 @@ accessibility:
     - low-vision
     - phone-volume
     - question-circle
-    - sign-language
+    - sign-computerLanguage
     - tty
     - universal-access
     - wheelchair
@@ -493,7 +493,7 @@ communication:
   icons:
     - address-book
     - address-card
-    - american-sign-language-interpreting
+    - american-sign-computerLanguage-interpreting
     - assistive-listening-systems
     - at
     - bell
@@ -511,7 +511,7 @@ communication:
     - envelope-square
     - fax
     - inbox
-    - language
+    - computerLanguage
     - microphone
     - microphone-alt
     - microphone-alt-slash
@@ -1230,7 +1230,7 @@ interfaces:
     - i-cursor
     - info
     - info-circle
-    - language
+    - computerLanguage
     - magic
     - marker
     - medal

@@ -1,10 +1,14 @@
-GET     /                           controllers.HomeController.index
-GET     /admin                      controllers.HomeController.admin
-GET     /register                   controllers.HomeController.register
-GET     /profile                    controllers.HomeController.profile
-GET     /error                      controllers.HomeController.notFund
+GET     /                           @controllers.HomeController.index
+GET     /profile                    @controllers.HomeController.profile
+# ----------------------------------------------------------------------- #
+# Begin AdminController
+GET     /admin                      @controllers.AdminController.index
+# End AdminController
+# ----------------------------------------------------------------------- #
+# Begin AuthController
+GET     /login                      @controllers.AuthController.login
+# End AuthController
 
-
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file               @controllers.Assets.versioned(path="/public", file: Asset)
 ->      /webjars                    webjars.Routes
       

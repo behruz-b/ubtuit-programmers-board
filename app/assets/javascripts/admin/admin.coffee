@@ -4,6 +4,7 @@ $ ->
   Glob = window.Glob || {}
 
   apiUrl =
+    addUser: '/createUser'
 
 
   defaultUserdata =

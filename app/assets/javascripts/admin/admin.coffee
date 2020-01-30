@@ -5,7 +5,7 @@ $ ->
 
   apiUrl =
     addUser: '/createUser'
-    addLanguage: 'createLanguage'
+    addLanguage: '/createLanguage'
 
 
   defaultUserdata =
@@ -15,14 +15,13 @@ $ ->
     password: ''
     photo: ''
 
-  defaultLanguagedata =
-    id: 0
+  defaultLanguageData =
     name: ''
     logo: ''
 
   vm = ko.mapping.fromJS
     user: defaultUserdata
-  language: defaultLanguagedata
+    language: defaultLanguageData
 
   handleError = (error) ->
     if error.status is 500 or (error.status is 400 and error.responseText)
@@ -36,19 +35,18 @@ $ ->
       toastr.error("Please enter a name")
       return no
     else if(!vm.language.logo())
-      toastr.error("Please enter a logo")
+      toastr.error("Please upload a logo the Language")
       return no
     else
-      data =
-
+      data = ko.mapping.toJS(vm.language())
       $.ajax
-        url: apiUrl.send
+        url: apiUrl.addLanguage
         type: 'POST'
         data: JSON.stringify(data)
         dataType: 'json'
         contentType: 'application/json'
-        .fail handleError
-        .done (response) ->
+      .fail handleError
+      .done (response) ->
         toastr.success(response)
 
 

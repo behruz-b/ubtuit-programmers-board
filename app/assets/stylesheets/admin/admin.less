@@ -1115,3 +1115,43 @@ label {
 .noUi-handle:before, .noUi-handle:after {
   display: none;
 }
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  display: block;
+}
+
+.btn-attach-image {
+  background-color: #000;
+  border-color: #000;
+  border-radius: 0;
+  width: 125px;
+  height: 35px;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+.btn-attach-image:hover {
+  color: #fff;
+  font-size: 14px;
+}
+
+.futura {
+  font-family: FuturaBT, Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
+}

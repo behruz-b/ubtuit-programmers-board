@@ -1,21 +1,62 @@
 @()
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>№</th>
-        <th>Name</th>
-        <th>Operations</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>John</td>
-        <td>
-          <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-          <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
-          <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+    <div class="row">
+        <div class="col-md-12 mt-5 float-left">
+                <!-- Button trigger modal addUser-->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUser">
+                <i class="fas fa-user-plus"> Add New User</i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-2 col-md-8 mt-5 text-center">
+            <table class="table table-bordered table-hover mt-5 table-striped table-primary" data-bind=" vm.getList().length > 0">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Name</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: vm.getList">
+                    <tr>
+                        <td data-bind="text: $data.id"></td>
+                        <td data-bind="text: $data.name"></td>
+                        <td>
+                            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Add User -->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="m-4">
+                    <div class="form-group">
+                        <label for="name" >Name: </label>
+                        <input class="form-control" type="text" id="name" data-bind="value: vm.name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle"> Close</i></button>
+                <button data-bind="click: vm.onSubmit" class="btn btn-success ">
+                    <i class="fas fa-user-check"> Add User</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+

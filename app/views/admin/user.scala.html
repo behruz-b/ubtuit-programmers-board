@@ -52,7 +52,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <form id="file-upload-form" class="m-4" action="@controllers.routes.AdminController.createUser()"
-      enctype="multipart/form-data" method="POST">
+      enctype="multipart/form-data" method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -62,19 +62,19 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="firstName" >Firs Name: </label>
-            <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName">
+            <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName" name="firstName">
           </div>
           <div class="form-group">
             <label for="lastName" >Last Name: </label>
-            <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName">
+            <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName" name="lastName">
           </div>
           <div class="form-group">
             <label for="login" >Login: </label>
-            <input class="form-control" type="text" id="login" data-bind="value: vm.user.login">
+            <input class="form-control" type="text" id="login" data-bind="value: vm.user.login" name="login">
           </div>
           <div class="form-group">
             <label for="pass" >Password: </label>
-            <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password">
+            <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
           </div>
           <div class="form-group">
             <span class="btn btn-file btn-attach-image futura">

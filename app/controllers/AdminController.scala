@@ -1,5 +1,7 @@
 package controllers
 
+import java.nio.file.{Files, Path}
+
 import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
 import javax.inject._
@@ -25,15 +27,20 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def index = Action {
     Ok(indexTemplate())
   }
-
-  def createUser = Action.async(parse.multipartFormData) { implicit request => {
+  def createUser(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
-    val firstName = body("firstName").head
-    val fileName =request.body.file("attachedFile").map {tempFile =>
-      tempFile.filename
-    }
-    logger.warn(s"firstName: $firstName")
-    Future.successful(Ok("ok"))
+    val firstName = body.get("firstName").flatMap(_.headOption)
+    logger.warn(s"name: $firstName")
+    request.body.file("attachedFile").map { tempFile =>
+      val fileName = tempFile.filename
+      val imgData = getBytesFromPath(tempFile.ref.path)
+      Redirect(routes.AdminController.index())
+        Future.successful(Ok(Json.toJson("Successfully uploaded")))
+    }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }}
+
+  private def getBytesFromPath(filePath: Path): Array[Byte] = {
+    Files.readAllBytes(filePath)
+  }
 
 }

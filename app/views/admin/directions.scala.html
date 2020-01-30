@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-12 mt-5 float-left">
-            <div class="panel-header pb2-2">
+            <div class="panel-header box-shadow">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUser">
                     <i class="fas fa-user-plus"> Add New User</i>
                 </button>
@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 text-center">
-            <div class="table-shadow">
+            <div class="box-shadow">
                 <div class="panel-header mt-5">
                     <table class="table table-bordered bg-white table-hover table-striped" data-bind=" vm.getList().length > 0">
                         <thead class="bg-darker-blue">
@@ -57,7 +57,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle"> Close</i></button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+                    Close</i></button>
                 <button data-bind="click: vm.onSubmit" class="btn btn-success ">
                     <i class="fas fa-user-check"> Add User</i></button>
             </div>

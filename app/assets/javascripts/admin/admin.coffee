@@ -22,12 +22,33 @@ $ ->
   defaultDirectionData =
     direction: ''
 
+  Page =
+    leaders: 'leaders'
+    computerLanguages: 'computerLanguages'
+    directions: 'directions'
+    messages: 'messages'
+    users: 'users'
+
   vm = ko.mapping.fromJS
     user: defaultUserdata
     language: defaultLanguageData
     direction: defaultDirectionData
     enableSubmitButton: yes
     errorText: ''
+    page: Page.users
+
+  vm.selectedPage = (page) ->
+    console.log(page)
+    if (page is Page.leaders)
+      vm.page(Page.leaders)
+    else if (page is Page.computerLanguages)
+      vm.page(Page.computerLanguages)
+    else if (page is Page.directions)
+      vm.page(Page.directions)
+    else if (page is Page.messages)
+      vm.page(Page.messages)
+    else
+      vm.page(Page.users)
 
   $contentFile = $('input[name=attachedFile]')
   $contentFile.change ->

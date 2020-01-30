@@ -1,4 +1,7 @@
 @this(webJarsUtil: org.webjars.play.WebJarsUtil)
+@import views.html.admin.user
+@import views.html.admin.directions
+@import views.html.admin.computerLanguage
 @()
 @import views.html.main
 @main("Admin Page", webJarsUtil) {
@@ -12,11 +15,11 @@
         <div class="avatarName">Welcome,<br>John Doe</div>
       </div>
       <ul class="sideMenu">
-        <li><a href=""><span class="fa fa-user"></span>Leaders</a></li>
-        <li><a href=""><span class="fa fa-laptop"></span>Computer Languages</a></li>
-        <li><a href=""><span class="fa fa-directions"></span>Directions</a></li>
-        <li><a href=""><span class="fa fa-envelope"></span>Messages</a></li>
-        <li><a href=""><span class="fa fa-users"></span>Users</a></li>
+        <li><a href="" data-bind="click: vm.selectedPage.bind($data, 'leaders')"><span class="fa fa-user"></span>Leaders</a></li>
+        <li><a href="" data-bind="click: vm.selectedPage.bind($data, 'computerLanguages')"><span class="fa fa-laptop"></span>Computer Languages</a></li>
+        <li><a href="" data-bind="click: vm.selectedPage.bind($data, 'directions')"><span class="fa fa-directions"></span>Directions</a></li>
+        <li><a href="" data-bind="click: vm.selectedPage.bind($data, 'messages')"><span class="fa fa-envelope"></span>Messages</a></li>
+        <li><a href="" data-bind="click: vm.selectedPage.bind($data, 'users')"><span class="fa fa-users"></span>Users</a></li>
       </ul>
     </div>
       <!--     SIDE AREA -->
@@ -36,9 +39,15 @@
       </nav>
         <!-- END NAV -->
         <!-- CONTAINER  -->
+      <!-- ko if: vm.page() == 'users' -->
       @user()
+      <!-- /ko -->
+        <!-- ko if: vm.page() == 'directions' -->
       @directions()
+        <!-- /ko -->
+        <!-- ko if: vm.page() == 'computerLanguages' -->
       @computerLanguage()
+        <!-- /ko -->
       <div class="mainContent">
         <div id="pagination">
           <ul class="pagination list-inline text-center">

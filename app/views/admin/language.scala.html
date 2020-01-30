@@ -1,4 +1,39 @@
 @()
+<!-- Button trigger modal addUser-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLanguage">
+    Add New Language
+</button>
+
+<div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Language</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="m-4">
+                    <div class="form-group">
+                        <label for="name" >Name: </label>
+                        <input class="form-control" type="text" id="name" data-bind="value: vm.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="logo" >Logo: </label>
+                        <input class="form-control" type="text" id="logo" data-bind="value: vm.logo">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button data-bind="click: vm.onSubmit" class="btn btn-success ">
+                    Add Language</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>

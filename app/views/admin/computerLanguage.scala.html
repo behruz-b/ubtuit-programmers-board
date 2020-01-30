@@ -1,6 +1,6 @@
 @()
 <div class="row">
-    <div class="col-md-12 mt-5 float-left">
+    <div class="col-md-12 ">
         <div class="panel-header box-shadow">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLanguage">
                 <i class="fas fa-laptop"> Add New Computer Language</i>
@@ -9,35 +9,37 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 ">
         <div class="box-shadow">
             <div class="panel-header mt-5">
-                <table class="table table-bordered bg-white table-hover table-striped" data-bind=" vm.getListComputerLanguage().length > 0">
-                    <thead class="bg-darker-blue">
-                        <tr>
-                            <th>№</th>
-                            <th>Name</th>
-                            <th>Logo</th>
-                            <th>Operations</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: vm.getListComputerLanguage">
-                        <tr>
-                            <td data-bind="text: $data.idLanguage">1</td>
-                            <td data-bind="text: $data.nameLanguage">Scala</td>
-                            <td data-bind="text: $data.logoLanguage">Logo</td>
-                            <td>
-                                <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                                <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
-                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3>Computer Languages</h3>
             </div>
+            <table class="table table-bordered bg-white table-hover table-striped" >
+                <thead class="bg-darker-blue">
+                    <tr>
+                        <th>№</th>
+                        <th>Name</th>
+                        <th>Logo</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <td>1</td>
+                        <td>Scala</td>
+                        <td>Logo</td>
+                        <td>
+                            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

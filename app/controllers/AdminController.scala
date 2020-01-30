@@ -23,4 +23,5 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def index = Action {
     Ok(indexTemplate())
   }
+
 }

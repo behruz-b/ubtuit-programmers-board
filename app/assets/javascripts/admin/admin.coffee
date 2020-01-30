@@ -19,9 +19,13 @@ $ ->
     name: ''
     logo: ''
 
+  defaultDirectionData =
+    direction: ''
+
   vm = ko.mapping.fromJS
     user: defaultUserdata
     language: defaultLanguageData
+    direction: defaultDirectionData
 
   handleError = (error) ->
     if error.status is 500 or (error.status is 400 and error.responseText)
@@ -41,6 +45,23 @@ $ ->
       data = ko.mapping.toJS(vm.language())
       $.ajax
         url: apiUrl.addLanguage
+        type: 'POST'
+        data: JSON.stringify(data)
+        dataType: 'json'
+        contentType: 'application/json'
+      .fail handleError
+      .done (response) ->
+        toastr.success(response)
+
+  vm.addDirection = ->
+    toastr.clear()
+    if (!vm.direction.name())
+      toastr.error("Please enter a Direction Name")
+      return no
+    else
+      data = ko.mapping.toJS(vm.direction())
+      $.ajax
+        url: apiUrl.addDirection
         type: 'POST'
         data: JSON.stringify(data)
         dataType: 'json'

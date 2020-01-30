@@ -14,6 +14,7 @@ import scala.concurrent.duration.DurationInt
 class AdminController @Inject()(val controllerComponents: ControllerComponents,
                                 implicit val webJarsUtil: WebJarsUtil,
                                 indexTemplate: index,
+                                languageTemplate: language,
                               )
                                (implicit val ec: ExecutionContext)
   extends BaseController with LazyLogging {
@@ -22,5 +23,9 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def index = Action {
     Ok(indexTemplate())
+  }
+
+  def language = Action {
+    Ok(languageTemplate())
   }
 }

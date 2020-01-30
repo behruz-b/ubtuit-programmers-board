@@ -1,3 +1,4 @@
+# --- !Ups
 CREATE TABLE "User"(
     "id" SERIAL NOT NULL PRIMARY KEY,
     "first_name" VARCHAR NOT NULL,
@@ -7,3 +8,6 @@ CREATE TABLE "User"(
     "created_date" DATE NOT NULL,
     "photo" VARCHAR NULL
 );
+
+# --- !Downs
+DROP TABLE "User";

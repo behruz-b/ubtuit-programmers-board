@@ -24,4 +24,8 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     Ok(indexTemplate())
   }
 
+  def createLanguage: Action[JsValue] = Action.async(parse.json) { implicit request =>
+
+  }
+
 }

@@ -57,6 +57,11 @@ $ ->
       vm.enableSubmitButton(yes)
     done: (e, data) ->
       result = data.result
+      if result is 'OK'
+      else
+      vm.enableSubmitButton(yes)
+      vm.errorText(result or 'Something went wrong! Please try again.')
+
 
 
   handleError = (error) ->
@@ -119,10 +124,22 @@ $ ->
     else if (!vm.user.password())
       toastr.error("Please enter password")
       return no
+    else if formData
+      vm.enableSubmitButton(no)
+      formData.submit()
     else
-      if formData
-        vm.enableSubmitButton(no)
-        formData.submit()
+      vm.enableSubmitButton(no)
+      $fileUploadForm.fileupload('send', {files: ''})
+      data = ko.mapping.toJS(vm.user())
+      $.ajax
+        url: apiUrl.addUser
+        type: 'POST'
+        data: JSON.stringify(data)
+        dataType: 'json'
+        contentType: 'application/json'
+      .fail handleError
+      .done (response) ->
+        toastr.success(response)
 
 
 

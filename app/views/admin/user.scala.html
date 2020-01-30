@@ -1,14 +1,16 @@
 @()
 <div class="row">
   <div class="col-md-12">
-    <div class="panel-header pb2-2">
-      <div class="float-left">Create new user</div>
+    <div class="panel-header box-shadow">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
+          <i class="fas fa-user-plus"> Add New User</i>
+        </button>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <div class="table-shadow">
+    <div class="box-shadow">
     <div class="panel-header mt-5">
       <h3>Registered Users</h3>
     </div>
@@ -43,5 +45,48 @@
       </tbody>
     </table>
   </div>
+  </div>
+</div>
+  <!-- Modal Add User -->
+<div class="modal fade" id="user-modal" role="dialog" aria-labelledby="UserTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" class="m-4">
+          <div class="form-group">
+            <label for="firstName" >Firs Name: </label>
+            <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName" >Last Name: </label>
+            <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName">
+          </div>
+          <div class="form-group">
+            <label for="login" >Login: </label>
+            <input class="form-control" type="text" id="login" data-bind="value: vm.user.login">
+          </div>
+          <div class="form-group">
+            <label for="pass" >Password: </label>
+            <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password">
+          </div>
+          <div class="form-group">
+            <label for="photo" >Photo: </label>
+            <input class="form-control" type="file" id="photo" data-bind="value: vm.user.photo">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+          Close</i></button>
+        <button data-bind="click: vm.onSubmit" class="btn btn-success ">
+          <i class="fas fa-user-check"> Add User</i></button>
+      </div>
+    </div>
   </div>
 </div>

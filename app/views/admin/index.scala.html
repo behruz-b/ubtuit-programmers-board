@@ -1,6 +1,5 @@
 @this(webJarsUtil: org.webjars.play.WebJarsUtil)
 @()
-
 @import views.html.main
 @main("Admin Page", webJarsUtil) {
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/admin/admin.css")">
@@ -16,7 +15,7 @@
         <li><a href=""><span class="fa fa-language"></span>Languages</a></li>
         <li><a href=""><span class="fa fa-directions"></span>Directions</a></li>
         <li><a href=""><span class="fa fa-envelope"></span>Messages</a></li>
-        <li><a href=""><span class="fa fa-user-circle"></span>Users</a></li>
+        <li><a href=""><span class="fa fa-users"></span>Users</a></li>
       </ul>
     </div>
       <!--     SIDE AREA -->
@@ -36,6 +35,7 @@
       </nav>
         <!-- END NAV -->
         <!-- CONTAINER  -->
+      @user()
       <div class="mainContent">
         <div id="pagination">
           <ul class="pagination list-inline text-center">

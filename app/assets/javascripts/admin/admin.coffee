@@ -35,7 +35,7 @@ $ ->
     direction: defaultDirectionData
     enableSubmitButton: yes
     errorText: ''
-    page: Page.users
+    page: Page.leaders
 
   vm.selectedPage = (page) ->
     console.log(page)

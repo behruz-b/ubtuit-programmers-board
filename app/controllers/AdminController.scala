@@ -34,7 +34,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     request.body.file("attachedFile").map { tempFile =>
       val fileName = tempFile.filename
       val imgData = getBytesFromPath(tempFile.ref.path)
-      Future.successful(Ok(Json.toJson("OK")))
+      Future.successful(Ok(indexTemplate()))
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }}
 

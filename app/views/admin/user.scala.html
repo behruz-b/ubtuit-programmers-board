@@ -1,5 +1,5 @@
 @()
-<div class="row">
+<div class="row" data-bind="">
   <div class="col-md-12">
     <div class="panel-header box-shadow">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
@@ -80,8 +80,9 @@
             <span class="btn btn-file btn-attach-image futura">
               Attach image<input type="file" name="attachedFile"/>
             </span>
-            <span data-bind="text: vm.errorText"></span>
+            <span id="file-name"></span>
           </div>
+          <span data-bind="text: vm.errorText"></span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">

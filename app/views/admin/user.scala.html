@@ -1,47 +1,96 @@
 @()
 <div class="row">
   <div class="col-md-12">
-    <div class="panel-header pb2-2">
-      <div class="float-left">Create new user</div>
+    <div class="panel-header box-shadow">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
+        <i class="fas fa-user-plus"> Add New User</i>
+      </button>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <div class="table-shadow">
-    <div class="panel-header mt-5">
-      <h3>Registered Users</h3>
+    <div class="box-shadow">
+      <div class="panel-header mt-5">
+        <h3>Registered Users</h3>
+      </div>
+      <table class="table table-bordered bg-white table-hover table-striped">
+        <thead class="bg-darker-blue">
+          <tr>
+            <th>№</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Created Date</th>
+            <th>Photo</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Maftunbek</td>
+            <td>Raxmatov</td>
+            <td>Prince</td>
+            <td>dddwa_DWad$wa23&^%wdTUwad</td>
+            <td>30.01.2020</td>
+            <td><img width="50" src="@routes.Assets.versioned("images/admin_page/admin.png")" alt=""></td>
+            <td>
+              <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+              <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+              <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table table-bordered bg-white table-hover table-striped">
-      <thead class="bg-darker-blue">
-        <tr>
-          <th>№</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Login</th>
-          <th>Password</th>
-          <th>Created Date</th>
-          <th>Photo</th>
-          <th>Operations</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Maftunbek</td>
-          <td>Raxmatov</td>
-          <td>Prince</td>
-          <td>dddwa_DWad$wa23&^%wdTUwad</td>
-          <td>30.01.2020</td>
-          <td><img width="50" src="@routes.Assets.versioned("images/admin_page/admin.png")" alt=""></td>
-          <td>
-            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
-            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
+</div>
+  <!-- Modal Add User -->
+<div class="modal fade" id="user-modal" role="dialog" aria-labelledby="UserTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="file-upload-form" class="m-4" action="@controllers.routes.AdminController.createUser()"
+      enctype="multipart/form-data" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="firstName" >Firs Name: </label>
+            <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName" name="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName" >Last Name: </label>
+            <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName" name="lastName">
+          </div>
+          <div class="form-group">
+            <label for="login" >Login: </label>
+            <input class="form-control" type="text" id="login" data-bind="value: vm.user.login" name="login">
+          </div>
+          <div class="form-group">
+            <label for="pass" >Password: </label>
+            <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
+          </div>
+          <div class="form-group">
+            <span class="btn btn-file btn-attach-image futura">
+              Attach image<input type="file" name="attachedFile"/>
+            </span>
+            <span data-bind="text: vm.errorText"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+            Close</i></button>
+          <button class="btn btn-success futura" type="submit" data-bind="enable: vm.enableSubmitButton">
+            <i class="fas fa-user-check"> Add User</i></button>
+        </div>
+      </form>
+
+    </div>
   </div>
 </div>

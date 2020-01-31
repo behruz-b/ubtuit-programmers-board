@@ -55,6 +55,7 @@ libraryDependencies ++= akkaLibs ++ akkaHttp ++ commonDependencies ++ dbLibs ++ 
   //web jars
   "org.webjars" %% "webjars-play" % "2.7.3",
   "org.webjars"% "jquery"% "3.4.1",
+  "org.webjars" % "jquery-ui-src" % "1.11.4",
   "org.webjars" % "jquery-file-upload" % "9.10.1",
   "org.webjars" % "knockout" % "3.3.0",
   "org.webjars" % "toastr" % "2.1.2",

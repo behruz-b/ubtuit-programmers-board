@@ -583,12 +583,6 @@ body {
 }
 .panel-header {
   margin-top: 4em;
-  box-shadow: 1px -1px 0px #d2d0dd,
-  2px -2px 0px #d2d0dd,
-  3px -3px 0px #d2d0dd,
-  4px -4px 0px #d2d0dd,
-  5px -5px 0px #d2d0dd,
-  6px -6px 0px #d2d0dd;
   //box-shadow: 0 0 15px 3px #d2d0dd !important;
   padding: 1.2em;
   background: white;
@@ -597,7 +591,7 @@ body {
 .pb2-2 {
   padding-bottom: 2em;
 }
-.table-shadow {
+.box-shadow {
   font-size: 18px;
   box-shadow: 1px -1px 0px #d2d0dd,
     2px -2px 0px #d2d0dd,
@@ -1120,4 +1114,44 @@ label {
 
 .noUi-handle:before, .noUi-handle:after {
   display: none;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  display: block;
+}
+
+.btn-attach-image {
+  background-color: #000;
+  border-color: #000;
+  border-radius: 0;
+  width: 125px;
+  height: 35px;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+.btn-attach-image:hover {
+  color: #fff;
+  font-size: 14px;
+}
+
+.futura {
+  font-family: FuturaBT, Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
 }

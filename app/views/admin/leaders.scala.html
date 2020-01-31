@@ -1,0 +1,133 @@
+@()
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-header box-shadow">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#leaders-modal">
+                <i class="fas fa-user-plus"> Add New Leaders</i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-shadow">
+            <div class="panel-header mt-5">
+                <h3>Registered Leaders</h3>
+            </div>
+            <table class="table table-bordered bg-white table-hover table-striped">
+                <thead class="bg-darker-blue">
+                    <tr>
+                        <th>№</th>
+                        <th>First Name</th>
+                        <th>Surname</th>
+                        <th>Year of birth</th>
+                        <th>Email</th>
+                        <th>Github account</th>
+                        <th>Computer languages</th>
+                        <th>Experience</th>
+                        <th>Phone number</th>
+                        <th>Phone direction</th>
+                        <th>Avatar</th>
+                        <th>Photo</th>
+                        <th>Career</th>
+                        <th>Approved</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>First Name</td>
+                        <td>Surname</td>
+                        <td>Year of birth</td>
+                        <td>Email</td>
+                        <td>Github account</td>
+                        <td>Computer languages</td>
+                        <td>Experience</td>
+                        <td>Phone number</td>
+                        <td>Phone direction</td>
+                        <td>Avatar</td>
+                        <td>Photo</td>
+                        <td>Career</td>
+                        <td>Approved</td>
+                        <td>
+                            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <!-- Modal Add Leaders -->
+<div class="modal fade" id="leaders-modal" role="dialog" aria-labelledby="leadersTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leadersTitle"><i class="fas fa-user-circle fa-2x"> Add Leaders</i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="firstName" >Firs Name: </label>
+                    <input class="form-control" type="text" id="firstName" data-bind="" name="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="surname" >Surname: </label>
+                    <input class="form-control" type="text" id="surname" data-bind="" name="surname">
+                </div>
+                <div class="form-group">
+                    <label for="yearOfBirth" >Year of birth: </label>
+                    <input class="form-control" type="text" id="yearOfBirth" data-bind="" name="yearOfBirth">
+                </div>
+                <div class="form-group">
+                    <label for="email" >Email: </label>
+                    <input class="form-control" type="text" id="email" data-bind="" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="gitAccount" >Github account: </label>
+                    <input class="form-control" type="text" id="gitAccount" data-bind="" name="gitAccount">
+                </div>
+                <div class="form-group">
+                    <label for="compLanguage" >Computer language: </label>
+                    <input class="form-control" type="text" id="compLanguage" data-bind="" name="compLanguage">
+                </div>
+                <div class="form-group">
+                    <label for="experience" >Experience: </label>
+                    <input class="form-control" type="text" id="experience" data-bind="" name="experience">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" >Phone Number: </label>
+                    <input class="form-control" type="text" id="phoneNumber" data-bind="" name="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="direction" >Direction: </label>
+                    <input class="form-control" type="text" id="direction" data-bind="" name="direction">
+                </div>
+                <div class="form-group">
+                    <label for="avatar" >Avatar: </label>
+                    <input class="form-control" type="text" id="avatar" data-bind="" name="avatar">
+                </div>
+                <div class="form-group">
+                    <label for="career" >Career: </label>
+                    <input class="form-control" type="text" id="career" data-bind="" name="career">
+                </div>
+                <div class="form-group">
+                    <label for="approved" >Approved: </label>
+                    <input class="form-control" type="text" id="approved" data-bind="" name="approved">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+                    Close</i></button>
+                <button class="btn btn-success futura" type="submit" data-bind="">
+                    <i class="fas fa-user-check"> Add Leaders</i></button>
+            </div>
+
+        </div>
+    </div>
+</div>

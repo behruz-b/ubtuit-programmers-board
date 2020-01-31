@@ -97,7 +97,7 @@ $ ->
       toastr.error("Please enter a name")
       return no
     else if(!vm.language.logo())
-      toastr.error("Please upload a logo the Language")
+      toastr.error("Please upload a logo the Computer Language")
       return no
     else
       data = ko.mapping.toJS(vm.language())

@@ -1,74 +1,71 @@
 @()
-<div class="row">
-    <div class="col-md-12 ">
-        <div class="panel-header box-shadow">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLanguage">
-                <i class="fas fa-laptop"> Add New Computer Language</i>
-            </button>
-        </div>
+<div class="row" data-bind="visible: vm.page() == 'computerLanguages'">
+  <div class="col-md-12 ">
+    <div class="panel-header box-shadow">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLanguage">
+        <i class="fas fa-laptop"> Add New Computer Language</i>
+      </button>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12 ">
-        <div class="box-shadow">
-            <div class="panel-header mt-5">
-                <h3>Computer Languages</h3>
-            </div>
-            <table class="table table-bordered bg-white table-hover table-striped" >
-                <thead class="bg-darker-blue">
-                    <tr>
-                        <th>№</th>
-                        <th>Name</th>
-                        <th>Logo</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    <tr>
-                        <td>1</td>
-                        <td>Scala</td>
-                        <td>Logo</td>
-                        <td>
-                            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  </div>
+  <div class="col-md-12 ">
+    <div class="box-shadow">
+      <div class="panel-header mt-5">
+        <h3>Computer Languages</h3>
+      </div>
+      <table class="table table-bordered bg-white table-hover table-striped" >
+        <thead class="bg-darker-blue">
+          <tr>
+            <th>№</th>
+            <th>Name</th>
+            <th>Logo</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr>
+            <td>1</td>
+            <td>Scala</td>
+            <td>Logo</td>
+            <td>
+              <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+              <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+              <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
 
-
-<div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
+  <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Language</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Language</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" class="m-4">
+            <div class="form-group">
+              <label for="nameLanguage" >Name: </label>
+              <input class="form-control" type="text" id="nameLanguage" data-bind="value: vm.language.name">
             </div>
-            <div class="modal-body">
-                <form action="" class="m-4">
-                    <div class="form-group">
-                        <label for="nameLanguage" >Name: </label>
-                        <input class="form-control" type="text" id="nameLanguage" data-bind="value: vm.language.name">
-                    </div>
-                    <div class="form-group">
-                        <span class="btn btn-file btn-attach-image futura">
+            <div class="form-group">
+              <span class="btn btn-file btn-attach-image futura">
                             Attach logo<input type="file" name="attachedFile"/>
                         </span>
-                        <span data-bind="text: vm.errorText"></span>
-                    </div>
-                </form>
+              <span data-bind="text: vm.errorText"></span>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button data-bind="click: vm.addLanguage" class="btn btn-success ">
-                    Add Language</button>
-            </div>
+          </form>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button data-bind="click: vm.addLanguage" class="btn btn-success ">
+                    Add Language</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

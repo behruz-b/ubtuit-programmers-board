@@ -25,7 +25,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   implicit val defaultTimeout: Timeout = Timeout(60.seconds)
 
   def index = Action {
-    Ok(indexTemplate())
+    Ok(indexTemplate(Some("leaders")))
   }
   def createUser(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
@@ -34,7 +34,8 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     request.body.file("attachedFile").map { tempFile =>
       val fileName = tempFile.filename
       val imgData = getBytesFromPath(tempFile.ref.path)
-      Future.successful(Ok(indexTemplate()))
+      logger.warn(s"name: $fileName")
+      Future.successful(Ok("OK"))
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }}
 

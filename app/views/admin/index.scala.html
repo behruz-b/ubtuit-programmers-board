@@ -2,6 +2,7 @@
 @import views.html.admin.user
 @import views.html.admin.directions
 @import views.html.admin.computerLanguage
+@import views.html.admin.leaders
 @()
 @import views.html.main
 @main("Admin Page", webJarsUtil) {
@@ -47,6 +48,9 @@
         <!-- /ko -->
         <!-- ko if: vm.page() == 'computerLanguages' -->
       @computerLanguage()
+        <!-- /ko -->
+        <!-- ko if: vm.page() == 'Leaders' -->
+      @leaders()
         <!-- /ko -->
       <div class="mainContent">
         <div id="pagination">

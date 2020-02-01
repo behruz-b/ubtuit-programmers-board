@@ -48,6 +48,8 @@ $ ->
     else
       vm.page(Page.users)
 
+# Users Form methods coffee
+
   $contentFile = $('input[name=attachedFile]')
   $contentFile.change ->
     filePath = $(this).val()
@@ -85,6 +87,43 @@ $ ->
         vm.enableSubmitButton(yes)
         toastr.error(result or 'Something went wrong! Please try again.')
 
+# Computer Language Form coffee methods
+
+  $contentLogo = $('input[name=attachedLogo]')
+  $contentLogo.change ->
+    filePath = $(this).val()
+    fileName = filePath.replace(/^.*[\\\/]/, '')
+
+    reAllowedTypes = /^.+((\.jpg)|(\.jpeg)|(\.png))$/i
+    if !reAllowedTypes.test(fileName)
+      alert('Only PNG or JPG files are allowed.')
+      return false
+
+    $('#logo-name').html fileName
+    vm.enableSubmitButton yes
+
+  formDataLanguage = null
+  $logoUploadForm = $('#logo-upload-form')
+  $logoUploadForm.fileupload
+    dataType: 'text'
+    autoUpload: no
+    singleFileUploads: false
+    replaceFileInput: true
+    multipart: true
+    add: (e, data) ->
+      formDataLanguage = data
+    fail: (e, data) ->
+      handleError(data.jqXHR)
+      vm.enableSubmitButton(yes)
+    done: (e, data) ->
+      result = data.result
+      if result is 'OK'
+        toastr.success('Form has been successfully submitted!')
+        ko.mapping.fromJS(defaultLanguageData, {}, vm.language)
+      else
+        vm.enableSubmitButton(yes)
+        toastr.error(result or 'Something went wrong! Please try again.')
+
 
   handleError = (error) ->
     if error.status is 500 or (error.status is 400 and error.responseText)
@@ -97,20 +136,18 @@ $ ->
     if (!vm.language.name())
       toastr.error("Please enter a name")
       return no
-    else if(!vm.language.logo())
+    else if !formDataLanguage
       toastr.error("Please upload a logo the Computer Language")
       return no
+    else if !formDataLanguage.files?.length
+      toastr.error("Please upload a logo the Computer Language")
+      return no
+    if formDataLanguage
+      vm.enableSubmitButton(no)
+      formDataLanguage.submit()
     else
-      data = ko.mapping.toJS(vm.language())
-      $.ajax
-        url: apiUrl.addLanguage
-        type: 'POST'
-        data: JSON.stringify(data)
-        dataType: 'json'
-        contentType: 'application/json'
-      .fail handleError
-      .done (response) ->
-        toastr.success(response)
+      $logoUploadForm.fileupload('send', {files: ''})
+      return no
 
   vm.addDirection = ->
     toastr.clear()

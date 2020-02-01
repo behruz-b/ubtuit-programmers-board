@@ -39,6 +39,19 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }}
 
+  def createLanguage(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
+    val body = request.body.asFormUrlEncoded
+    val name = body.get("name").flatMap(_.headOption)
+    logger.warn(s"name: $name")
+    request.body.file("attachedLogo").map { tempFile =>
+      val fileName = tempFile.filename
+      val imgData = getBytesFromPath(tempFile.ref.path)
+      logger.warn(s"name: $fileName")
+      Future.successful(Ok("OK"))
+    }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
+  }
+  }
+
   private def getBytesFromPath(filePath: Path): Array[Byte] = {
     Files.readAllBytes(filePath)
   }

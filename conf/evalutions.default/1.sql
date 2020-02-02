@@ -6,7 +6,8 @@ CREATE TABLE "User"(
     "login" VARCHAR NOT NULL,
     "password" VARCHAR NOT NULL,
     "created_date" DATE NOT NULL,
-    "photo" VARCHAR NULL
+    "photo" VARCHAR NULL,
+    "permission_id" INT CONSTRAINT  "UserFkPermissionsId" REFERENCES  "Permissions" ("id") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 # --- !Downs

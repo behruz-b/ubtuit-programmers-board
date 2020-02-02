@@ -51,7 +51,7 @@
                     <div class="modal-body m-4">
                         <div class="form-group">
                             <label for="nameLanguage" >Name: </label>
-                            <input class="form-control" type="text" id="nameLanguage" data-bind="value: vm.language.name">
+                            <input class="form-control" type="text" id="nameLanguage" name="languageName" data-bind="value: vm.language.name">
                         </div>
                         <div class="form-group">
                             <span class="btn btn-file btn-attach-image futura">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button data-bind="click: vm.addLanguage" class="btn btn-success ">
+                        <button type="submit" data-bind="click: vm.addLanguage, enable: vm.enableSubmitButton" class="btn btn-success ">
                             Add Language</button>
                     </div>
                 </form>

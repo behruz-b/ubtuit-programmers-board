@@ -10,7 +10,7 @@ import utils.Date2SqlDate
 
 import scala.concurrent.Future
 
-trait LanguageComponent extends {
+trait DirectionComponent extends {
   self: HasDatabaseConfigProvider[JdbcProfile] =>
 
   import utils.PostgresDriver.api._
@@ -25,7 +25,7 @@ trait LanguageComponent extends {
 
 }
 
-@ImplementedBy(classOf[LanguageDaoImpl])
+@ImplementedBy(classOf[DirectionDaoImpl])
 trait DirectionDao {
   def addDirection(directionData: Direction): Future[Int]
 }
@@ -39,7 +39,7 @@ class DirectionDaoImpl @Inject()(protected val dbConfigProvider: DatabaseConfigP
 
   import utils.PostgresDriver.api._
 
-  val direction = TableQuery[DIrectionTable]
+  val direction = TableQuery[DirectionTable]
 
   override def addDirection(directionData: Direction): Future[Int] = {
     db.run {

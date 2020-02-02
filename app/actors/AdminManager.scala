@@ -19,7 +19,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class AdminManager @Inject()(val environment: Environment,
                              val configuration: Configuration,
                              languageDao: LanguageDao,
-                            directionDao: DirectionDao
+                              directionDao: DirectionDao
                              )
                             (implicit val ec: ExecutionContext)
   extends Actor with LazyLogging {

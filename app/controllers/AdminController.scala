@@ -2,12 +2,21 @@ package controllers
 
 import java.nio.file.{Files, Path}
 
+import akka.actor.ActorRef
+import akka.pattern.ask
+import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
 import javax.inject._
 import org.webjars.play.WebJarsUtil
+import play.api.libs.Files.TemporaryFile
+import play.api.libs.json.{JsValue, Json}
+import play.api.mvc._
+import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, Language}
+import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration.DurationInt
+
 
 @Singleton
 class AdminController @Inject()(val controllerComponents: ControllerComponents,

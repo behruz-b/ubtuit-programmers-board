@@ -5,6 +5,7 @@ GET     /profile                    @controllers.HomeController.profile
 GET     /admin                      @controllers.AdminController.index
 POST    /createUser                 @controllers.AdminController.createUser
 POST    /addLanguage                @controllers.AdminController.createLanguage
+GET     /getLang                    @controllers.AdminController.getLanguage
 # End AdminController
 # ----------------------------------------------------------------------- #
 # Begin AuthController

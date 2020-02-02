@@ -39,6 +39,9 @@ class AdminManager @Inject()(val environment: Environment,
     case AddDirection(data) =>
       addDirection(data).pipeTo(sender())
 
+    case GetLanguage =>
+      getLanguage.pipeTo(sender())
+
     case _ => logger.info(s"received unknown message")
   }
 
@@ -51,12 +54,18 @@ class AdminManager @Inject()(val environment: Environment,
       Files.write(imagesDir.resolve(filenameGenerator()), imageData)
     }
   }
-  private def filenameGenerator() = {
-    new Date().getTime.toString + ".png"
-  }
+
 
   private def addDirection(directionData: Direction): Future[Int] = {
     directionDao.addDirection(Direction(None, directionData.name))
+  }
+
+  private def getLanguage = {
+    languageDao.getLanguages
+  }
+
+  private def filenameGenerator() = {
+    new Date().getTime.toString + ".png"
   }
 
 //  def getImage(fileId: String) = {

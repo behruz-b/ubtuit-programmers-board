@@ -5,7 +5,7 @@ $ ->
 
   apiUrl =
     addUser: '/createUser'
-    addLanguage: '/createLanguage'
+    getLanguage: '/getLang'
     addDirection: '/createDirection'
 
 
@@ -36,6 +36,7 @@ $ ->
     direction: defaultDirectionData
     enableSubmitButton: yes
     page: Glob.page
+    languageList: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -149,6 +150,18 @@ $ ->
     else
       $logoUploadForm.fileupload('send', {files: ''})
       return no
+
+  getLanguage = ->
+    $.ajax
+      url:apiUrl.getLanguage
+      type: 'GET'
+    .fail handleError
+    .done (response) ->
+      for res in response
+        res.logoName = "/assets/upload-files/" + res.logoName
+      vm.languageList(response)
+
+  getLanguage()
 
   vm.addDirection = ->
     toastr.clear()

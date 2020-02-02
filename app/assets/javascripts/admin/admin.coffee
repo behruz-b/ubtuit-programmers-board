@@ -169,7 +169,8 @@ $ ->
       toastr.error("Please enter a Direction Name")
       return no
     else
-      data = ko.mapping.toJS(vm.direction.name())
+      data =
+        name: vm.direction.name()
       $.ajax
         url: apiUrl.addDirection
         type: 'POST'

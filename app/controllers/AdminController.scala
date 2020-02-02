@@ -66,7 +66,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }
   }
 
-  def createDirection: Action[JsValue] = Action.async(parse.json) { implicit request =>
+  def createDirection = Action.async(parse.json){ implicit request =>
     val name = (request.body \ "name").as[String]
     logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>

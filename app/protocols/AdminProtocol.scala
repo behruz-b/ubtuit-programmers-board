@@ -4,6 +4,8 @@ import play.api.libs.json.{Json, OFormat}
 
 object AdminProtocol {
 
+  case object GetLanguage
+
   case class AddLanguage(language: Language)
 
   case class AddDirection(direction: Direction)

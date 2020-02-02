@@ -30,6 +30,8 @@ trait LanguageComponent extends {
 @ImplementedBy(classOf[LanguageDaoImpl])
 trait LanguageDao {
   def addLanguage(languageData: Language): Future[Int]
+
+  def getLanguages: Future[Seq[Language]]
 }
 
 @Singleton
@@ -46,6 +48,12 @@ class LanguageDaoImpl @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   override def addLanguage(languageData: Language): Future[Int] = {
     db.run {
       (language returning language.map(_.id)) += languageData
+    }
+  }
+
+  override def getLanguages: Future[Seq[Language]] = {
+    db.run {
+      language.result
     }
   }
 }

@@ -6,6 +6,8 @@ object AdminProtocol {
 
   case object GetLanguage
 
+  case object GetDirection
+
   case class AddLanguage(language: Language)
 
   case class AddDirection(direction: Direction)

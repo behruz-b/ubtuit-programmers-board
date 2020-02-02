@@ -11,7 +11,7 @@ import org.webjars.play.WebJarsUtil
 import play.api.libs.Files.TemporaryFile
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
-import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetLanguage, Language}
+import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetDirection, GetLanguage, Language}
 import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -66,7 +66,13 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }
   }
 
-  def createDirection: Action[JsValue] = Action.async(parse.json) { implicit request =>
+  def getDirection= Action.async {
+    (adminManager ? GetDirection).mapTo[Seq[Direction]].map{dir =>
+      Ok(Json.toJson(dir))
+    }
+  }
+
+  def createDirection = Action.async(parse.json){ implicit request =>
     val name = (request.body \ "name").as[String]
     logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>

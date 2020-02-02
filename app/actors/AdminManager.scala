@@ -42,6 +42,10 @@ class AdminManager @Inject()(val environment: Environment,
     case GetLanguage =>
       getLanguage.pipeTo(sender())
 
+    case GetDirection =>
+      getDirection.pipeTo(sender())
+
+
     case _ => logger.info(s"received unknown message")
   }
 
@@ -62,6 +66,10 @@ class AdminManager @Inject()(val environment: Environment,
 
   private def getLanguage = {
     languageDao.getLanguages
+  }
+
+  private def getDirection = {
+    directionDao.getDirection
   }
 
   private def filenameGenerator() = {

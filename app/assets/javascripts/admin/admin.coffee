@@ -7,6 +7,7 @@ $ ->
     addUser: '/createUser'
     getLanguage: '/getLang'
     addDirection: '/createDirection'
+    getDirection: '/getDir'
 
 
   defaultUserdata =
@@ -37,6 +38,7 @@ $ ->
     enableSubmitButton: yes
     page: Glob.page
     languageList: []
+    directionList: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -163,13 +165,26 @@ $ ->
 
   getLanguage()
 
+  getDirection = ->
+    $.ajax
+      url: apiUrl.getDirection
+      type: 'GET'
+    .fail handleError
+    .done (response) ->
+      console.log('1: ', vm.directionList().length)
+      vm.directionList(response)
+      console.log('2: ', vm.directionList().length)
+
+  getDirection()
+
   vm.addDirection = ->
     toastr.clear()
     if (!vm.direction.name())
       toastr.error("Please enter a Direction Name")
       return no
     else
-      data = ko.mapping.toJS(vm.direction.name())
+      data =
+        name: vm.direction.name()
       $.ajax
         url: apiUrl.addDirection
         type: 'POST'

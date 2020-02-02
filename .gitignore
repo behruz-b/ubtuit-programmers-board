@@ -1,6 +1,7 @@
 logs/application.log
 project
-target
+project/target/
+target/
 tmp
 .history
 dist

@@ -1,5 +1,5 @@
 @()
-<div class="row">
+<div class="row" data-bind="visible: vm.page() == 'computerLanguages'">
     <div class="col-md-12 ">
         <div class="panel-header box-shadow">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLanguage">
@@ -7,8 +7,6 @@
             </button>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-12 ">
         <div class="box-shadow">
             <div class="panel-header mt-5">
@@ -38,36 +36,36 @@
             </table>
         </div>
     </div>
-</div>
 
-
-<div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Language</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" class="m-4">
-                    <div class="form-group">
-                        <label for="nameLanguage" >Name: </label>
-                        <input class="form-control" type="text" id="nameLanguage" data-bind="value: vm.language.name">
+    <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="logo-upload-form" class="m-4" action="@controllers.routes.AdminController.createLanguage()"
+                enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Language</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <span class="btn btn-file btn-attach-image futura">
-                            Attach logo<input type="file" name="attachedFile"/>
-                        </span>
-                        <span data-bind="text: vm.errorText"></span>
+                    <div class="modal-body m-4">
+                        <div class="form-group">
+                            <label for="nameLanguage" >Name: </label>
+                            <input class="form-control" type="text" id="nameLanguage" name="languageName" data-bind="value: vm.language.name">
+                        </div>
+                        <div class="form-group">
+                            <span class="btn btn-file btn-attach-image futura">
+                                Attach logo<input type="file" name="attachedLogo"/>
+                            </span>
+                            <span id="logo-name"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" data-bind="click: vm.addLanguage, enable: vm.enableSubmitButton" class="btn btn-success ">
+                            Add Language</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button data-bind="click: vm.addLanguage" class="btn btn-success ">
-                    Add Language</button>
             </div>
         </div>
     </div>

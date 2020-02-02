@@ -1,5 +1,6 @@
 @()
-<div class="row" data-bind="">
+
+<div class="row" data-bind="visible: vm.page() == 'users'">
   <div class="col-md-12">
     <div class="panel-header box-shadow">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-modal">
@@ -7,8 +8,6 @@
       </button>
     </div>
   </div>
-</div>
-<div class="row">
   <div class="col-md-12">
     <div class="box-shadow">
       <div class="panel-header mt-5">
@@ -46,7 +45,6 @@
       </table>
     </div>
   </div>
-</div>
   <!-- Modal Add User -->
 <div class="modal fade" id="user-modal" role="dialog" aria-labelledby="UserTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -82,16 +80,19 @@
             </span>
             <span id="file-name"></span>
           </div>
-          <span data-bind="text: vm.errorText"></span>
+          <div id="progress">
+            <div class="bar" style="width: 0%;"></div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
             Close</i></button>
-          <button class="btn btn-success futura" type="submit" data-bind="enable: vm.enableSubmitButton">
+          <button class="btn btn-success futura" type="submit"  data-bind="click: vm.onSubmit, enable: vm.enableSubmitButton">
             <i class="fas fa-user-check"> Add User</i></button>
         </div>
       </form>
 
     </div>
   </div>
+</div>
 </div>

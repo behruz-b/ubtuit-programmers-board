@@ -7,6 +7,7 @@ $ ->
     addUser: '/createUser'
     getLanguage: '/getLang'
     addDirection: '/createDirection'
+    getDirection: '/getDir'
 
 
   defaultUserdata =
@@ -37,6 +38,7 @@ $ ->
     enableSubmitButton: yes
     page: Glob.page
     languageList: []
+    directionList: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -162,6 +164,18 @@ $ ->
       vm.languageList(response)
 
   getLanguage()
+
+  getDirection = ->
+    $.ajax
+      url: apiUrl.getDirection
+      type: 'GET'
+    .fail handleError
+    .done (response) ->
+      console.log('1: ', vm.directionList().length)
+      vm.directionList(response)
+      console.log('2: ', vm.directionList().length)
+
+  getDirection()
 
   vm.addDirection = ->
     toastr.clear()

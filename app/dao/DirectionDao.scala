@@ -28,6 +28,8 @@ trait DirectionComponent extends {
 @ImplementedBy(classOf[DirectionDaoImpl])
 trait DirectionDao {
   def addDirection(directionData: Direction): Future[Int]
+
+  def getDirection: Future[Seq[Direction]]
 }
 
 @Singleton
@@ -44,6 +46,12 @@ class DirectionDaoImpl @Inject()(protected val dbConfigProvider: DatabaseConfigP
   override def addDirection(directionData: Direction): Future[Int] = {
     db.run {
       (direction returning direction.map(_.id)) += directionData
+    }
+  }
+
+  override def getDirection: Future[Seq[Direction]] = {
+    db.run {
+      direction.result
     }
   }
 }

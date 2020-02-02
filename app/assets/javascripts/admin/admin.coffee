@@ -6,6 +6,7 @@ $ ->
   apiUrl =
     addUser: '/createUser'
     addLanguage: '/createLanguage'
+    addDirection: '/createDirection'
 
 
   defaultUserdata =
@@ -20,7 +21,7 @@ $ ->
     logo: ''
 
   defaultDirectionData =
-    direction: ''
+    name: ''
 
   Page =
     leaders: 'leaders'

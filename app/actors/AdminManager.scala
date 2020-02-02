@@ -8,6 +8,7 @@ import akka.pattern.pipe
 import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
 import dao.LanguageDao
+import dao.DirectionDao
 import javax.inject.Inject
 import play.api.{Configuration, Environment}
 import protocols.AdminProtocol._
@@ -17,7 +18,8 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class AdminManager @Inject()(val environment: Environment,
                              val configuration: Configuration,
-                             languageDao: LanguageDao
+                             languageDao: LanguageDao,
+                            directionDao: DirectionDao
                              )
                             (implicit val ec: ExecutionContext)
   extends Actor with LazyLogging {
@@ -34,6 +36,9 @@ class AdminManager @Inject()(val environment: Environment,
     case AddImage(filename, imageData) =>
       addImage(filename, imageData).pipeTo(sender())
 
+    case AddDirection(data) =>
+      addDirection(data).pipeTo(sender())
+
     case _ => logger.info(s"received unknown message")
   }
 
@@ -49,6 +54,11 @@ class AdminManager @Inject()(val environment: Environment,
   private def filenameGenerator() = {
     new Date().getTime.toString + ".png"
   }
+
+  private def addDirection(directionData: Direction): Future[Int] = {
+    directionDao.addDirection(Direction(None, directionData.name))
+  }
+
 //  def getImage(fileId: String) = {
 //    Future {
 //      require(isCorrectFileName(fileId))

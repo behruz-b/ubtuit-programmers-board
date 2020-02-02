@@ -1,65 +1,69 @@
 @()
 
 <div class="row" data-bind="visible: vm.page() == 'directions'">
-  <div class="col-md-12 mt-5 float-left">
-    <div class="panel-header pb2-2">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDirection">
-        <i class="fas fa-directions"> Add New Direction</i>
-      </button>
-    </div>
-  </div>
-  <div class="col-md-12 text-center">
-    <div class="table-shadow">
-      <div class="panel-header mt-5">
-        <table class="table table-bordered bg-white table-hover table-striped">
-          <thead class="bg-darker-blue">
-            <tr>
-              <th>№</th>
-              <th>Name</th>
-              <th>Operations</th>
-            </tr>
-          </thead>
-          <tbody data-bind="foreach: vm.getListDirection">
-            <tr>
-              <td data-bind="text: $data.direction.id">1</td>
-              <td data-bind="text: $data.direction.name">John Doe</td>
-              <td>
-                <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
-                <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-    <!-- Modal Add User -->
-  <div class="modal fade" id="addDirection" tabindex="-1" role="dialog" aria-labelledby="addDirectionTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="directionModalLongTitle"><i class="fas fa-map-signs fa-2x"> Add Directoin</i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <div class="col-md-12">
+        <div class="panel-header box-shadow">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDirection">
+                <i class="fas fa-directions"> Add New Direction</i>
+            </button>
         </div>
-        <div class="modal-body">
-          <form action="" class="m-4">
-            <div class="form-group">
-              <label for="name" >Direction Names: </label>
-              <input class="form-control" type="text" id="name" data-bind="value: vm.direction.name">
+    </div>
+    <div class="col-md-12 ">
+        <div class="box-shadow">
+            <div class="panel-header mt-5">
+                <h3>Directions</h3>
             </div>
-          </form>
+            <table class="table table-bordered bg-white table-hover table-striped">
+                <thead class="bg-darker-blue">
+                    <tr>
+                        <th>№</th>
+                        <th>Name</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="">
+                    <tr>
+                        <td data-bind="">1</td>
+                        <td data-bind="">John Doe</td>
+                        <td>
+                            <a class="add mr-3" title="Add" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a class="mr-3 edit" title="Edit" data-toggle="tooltip" ><i class="fas fa-pen-alt"></i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle"> Close</i></button>
-          <button data-bind="click: vm.onSubmitDirection" class="btn btn-success ">
-            <i class="fas fa-check-circle"> Add Direction</i></button>
-        </div>
-      </div>
     </div>
-  </div>
+
+
+        <!-- Modal Add User -->
+    <div class="modal fade" id="addDirection" tabindex="-1" role="dialog" aria-labelledby="addDirectionTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="directionModalLongTitle"><i class="fas fa-map-signs fa-2x">
+                        Add Directoin</i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="m-4">
+                        <div class="form-group">
+                            <label for="name" >Direction Names: </label>
+                            <input class="form-control" type="text" id="name" data-bind="value: vm.direction.name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+                        Close</i></button>
+                    <button data-bind="click: vm.onSubmitDirection" class="btn btn-success ">
+                        <i class="fas fa-check-circle"> Add Direction</i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

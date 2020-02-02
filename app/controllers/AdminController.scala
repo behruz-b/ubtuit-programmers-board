@@ -2,17 +2,9 @@ package controllers
 
 import java.nio.file.{Files, Path}
 
-import akka.actor.ActorRef
-import akka.pattern.ask
-import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
 import javax.inject._
 import org.webjars.play.WebJarsUtil
-import play.api.libs.Files.TemporaryFile
-import play.api.libs.json.Json
-import play.api.mvc._
-import protocols.AdminProtocol.{AddImage, AddLanguage, Language}
-import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration.DurationInt
@@ -59,6 +51,14 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   }
   }
 
+
+  def createDirection: Action[JsValue] = Action.async(parse.json) { implicit request =>
+    val name = (request.body \ "name").as[String]
+    logger.warn(s"controllerga keldi")
+    (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
+      Ok(Json.toJson(id))
+    }
+  }
 
   private def uploadFile(filename: String, content: Array[Byte]) {
       (adminManager ? AddImage(filename, content)).mapTo[Unit].map { _ =>

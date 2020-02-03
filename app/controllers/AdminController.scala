@@ -11,7 +11,7 @@ import org.webjars.play.WebJarsUtil
 import play.api.libs.Files.TemporaryFile
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
-import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetDirection, GetLanguage, Language, DeleteDirection}
+import protocols.AdminProtocol._
 import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -69,6 +69,12 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def getDirection= Action.async {
     (adminManager ? GetDirection).mapTo[Seq[Direction]].map{dir =>
       Ok(Json.toJson(dir))
+    }
+  }
+
+  def getRoles = Action.async {
+    (adminManager ? GetRoles).mapTo[Seq[Role]].map{ role =>
+      Ok(Json.toJson(role))
     }
   }
 

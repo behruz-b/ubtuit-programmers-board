@@ -9,6 +9,7 @@ $ ->
     addDirection: '/createDirection'
     getDirection: '/getDir'
     deleteDirection: '/delete/direction'
+    getRoles: '/get-roles'
 
 
   defaultUserdata =
@@ -41,10 +42,8 @@ $ ->
     page: Glob.page
     languageList: []
     directionList: []
-    availableValues: ko.observableArray(["value 1","value 2","value 3","value 4","value 5"]),
-    selectedValues: ko.observableArray(["value 2","value 5"]),
-    availableObjects: ko.observableArray([{id:1,name:"object 1"}, {id:2,name:"object 2"},{id:3,name: "object 3"},{id:4,name:"object 4"},{id:5,name:"object 5"}]),
-    selectedIds: ko.observableArray([2,5])
+    roleList: []
+    selectedRoles: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -156,6 +155,7 @@ $ ->
     if formDataLanguage
       vm.enableSubmitButton(no)
       formDataLanguage.submit()
+      getLanguage()
     else
       $logoUploadForm.fileupload('send', {files: ''})
       return no
@@ -182,6 +182,16 @@ $ ->
 
   getDirection()
 
+  getRole = ->
+    $.ajax
+      url: apiUrl.getRoles
+      type: 'GET'
+    .fail handleError
+    .done (response) ->
+      vm.roleList(response)
+
+  getRole()
+
   vm.addDirection = ->
     toastr.clear()
     if (!vm.direction.name())
@@ -199,6 +209,8 @@ $ ->
       .fail handleError
       .done (response) ->
         toastr.success(response)
+        getDirection()
+
 
   vm.onSubmit = ->
     toastr.clear()

@@ -15,6 +15,69 @@ body, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, table, tr, thead, tbody, th, td, ul
   font-family: sans-serif;
 }
 
+body {
+  color: #566787;
+  background: #f7f5f2;
+  font-family: 'Roboto', sans-serif;
+}
+
+table.table {
+  table-layout: fixed;
+  margin-top: 15px;
+}
+table.table tr th, table.table tr td {
+  border-color: #e9e9e9;
+}
+table.table th i {
+  font-size: 13px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+table.table th:first-child {
+  width: 60px;
+}
+table.table th:last-child {
+  width: 120px;
+}
+table.table td a {
+  color: #a0a5b1;
+  display: inline-block;
+  margin: 0 5px;
+}
+table.table td a.add {
+  color: #27C46B;
+}
+table.table td a.edit {
+  color: #FFC107;
+}
+table.table td a.delete {
+  color: #E34724;
+}
+table.table td i {
+  font-size: 19px;
+}
+table.table td a.add i {
+  font-size: 24px;
+  margin-right: -1px;
+  position: relative;
+  top: 3px;
+}
+table.table .form-control {
+  height: 32px;
+  line-height: 32px;
+  box-shadow: none;
+  border-radius: 2px;
+}
+table.table .form-control.error {
+  border-color: #f50000;
+}
+table.table td .add {
+  display: none;
+}
+table.table td i {
+  font-size: 19px;
+}
+
 p {
   line-height: 1.5;
 }

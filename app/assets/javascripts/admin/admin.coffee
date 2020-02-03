@@ -213,6 +213,65 @@ $ ->
       $fileUploadForm.fileupload('send', {files: ''})
       return no
 
+#    Edit part
+  $(document).on 'click', '.add', ->
+    empty = false
+    input = $(this).parents('tr').find('input[type="text"]')
+    input.each ->
+      if !$(this).val()
+        $(this).addClass 'error'
+        empty = true
+      else
+        $(this).removeClass 'error'
+      return
+    $(this).parents('tr').find('.error').first().focus()
+    if !empty
+      input.each ->
+        $(this).parent('td').html $(this).val()
+      $(this).parents('tr').find('.add, .edit').toggle()
+
+  # Edit row on edit button click
+  $(document).on 'click', '.edit', ->
+    row = $(this).closest('tr').children('td')
+    name = row[1].innerText
+    direction = row[2].innerText
+    row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
+    row[2].innerHTML = '<input type="text" class="form-control" value="' + direction + '">'
+    $(this).parents('tr').find('.add, .edit').toggle()
+    return
+  $(document).on 'click', '.add', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+      name: row[1].innerText
+      direction: row[2].innerText
+    postData = JSON.stringify(data)
+    $.ajax
+      url: '/update/group'
+      method: 'POST'
+      data: postData
+      contentType: 'application/json'
+      success: (data) ->
+        alert JSON.stringify(data)
+      error: (errMsg) ->
+        alert JSON.stringify(errMsg)
+
+# Delete row on delete button click
+  $(document).on 'click', '.delete', ->
+    row = $(this).closest('tr').children('td')
+    data = id: row[0].innerText
+    postData = JSON.stringify(data)
+    $.ajax
+      url: '/delete/group'
+      method: 'POST'
+      data: postData
+      contentType: 'application/json'
+      success: (data) ->
+        alert JSON.stringify(data)
+      error: (errMsg) ->
+        alert JSON.stringify(errMsg)
+    $(this).parents('tr').remove()
+
 
 
   ko.applyBindings {vm}

@@ -10,8 +10,8 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       @webJarsUtil.locate("css/bootstrap.min.css").css()
+      @webJarsUtil.locate("css/bootstrap-select.min.css").css()
       @webJarsUtil.locate("build/toastr.min.css").css()
-
       <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("fontawesome-free-5.10.1-web/css/all.css")">
       <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
       @webJarsUtil.locate("jquery.min.js").script()
@@ -21,8 +21,10 @@
       @webJarsUtil.locate("jquery-ui-src/1.11.4/ui/widget.js").script()
       @webJarsUtil.locate("jquery-file-upload/9.10.1/js/jquery.iframe-transport.js").script()
       @webJarsUtil.locate("jquery-file-upload/9.10.1/js/jquery.fileupload.js").script()
+      @webJarsUtil.locate("js/bootstrap-select.min.js").script()
+      <script src="@routes.Assets.versioned("javascripts/util/ko.select-picker.js")"></script>
       <script src="@routes.Assets.versioned("javascripts/common.assist.js")" type="text/javascript"></script>
-      @webJarsUtil.locate("toastr.min.js").script()
+      @webJarsUtil.locate("build/toastr.min.js").script()
     </head>
     <body>
         @content

@@ -1,5 +1,7 @@
 @()
-
+<script >
+        // $('select').selectpicker();
+</script>
 <div class="row" data-bind="visible: vm.page() == 'users'">
   <div class="col-md-12">
     <div class="panel-header box-shadow">
@@ -73,6 +75,14 @@
           <div class="form-group">
             <label for="pass" >Password: </label>
             <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
+          </div>
+          <div class="form-group">
+              <select id="select1" multiple class="selectpicker form-control" >
+                <option value="1">birinchi</option>
+                <option value="2">birinchi2</option>
+                <option value="3">birinchi3</option>
+                <option value="4">birinchi4</option>
+              </select>
           </div>
           <div class="form-group">
             <span class="btn btn-file btn-attach-image futura">

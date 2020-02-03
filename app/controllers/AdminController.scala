@@ -11,7 +11,7 @@ import org.webjars.play.WebJarsUtil
 import play.api.libs.Files.TemporaryFile
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
-import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetDirection, GetLanguage, Language}
+import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetDirection, GetLanguage, Language, DeleteDirection}
 import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -77,6 +77,19 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
       Ok(Json.toJson(id))
+    }
+  }
+
+  def deleteDirection = Action.async(parse.json) { implicit request =>
+    val id = (request.body \ "id").as[Int]
+    logger.warn(s"keldi")
+    (adminManager ? DeleteDirection(id)).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism o`chirildi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
     }
   }
 

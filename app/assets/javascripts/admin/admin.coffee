@@ -289,4 +289,20 @@ $ ->
         alert JSON.stringify(errMsg)
     $(this).parents('tr').remove()
 
+  $(document).on 'click', '.deleteDirection', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+    $.ajax
+      url: '/delete/direction'
+      method: 'DELETE'
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
+
+    $(this).parents('tr').remove()
+
   ko.applyBindings {vm}

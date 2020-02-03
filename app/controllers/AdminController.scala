@@ -72,16 +72,17 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }
   }
 
-  def createDirection = Action.async(parse.json){ implicit request =>
+  def createDirection = Action.async(parse.json){ implicit request => {
     val name = (request.body \ "name").as[String]
     logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
       Ok(Json.toJson(id))
     }
   }
+  }
 
-  def deleteDirection = Action.async(parse.json) { implicit request =>
-    val id = (request.body \ "id").as[Int]
+  def deleteDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
     logger.warn(s"keldi")
     (adminManager ? DeleteDirection(id)).mapTo[Int].map{ i =>
       if (i != 0){
@@ -91,6 +92,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
         Ok("Bunday raqamli ism topilmadi")
       }
     }
+  }
   }
 
   private def uploadFile(filename: String, content: Array[Byte]) {

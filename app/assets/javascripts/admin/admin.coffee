@@ -8,6 +8,7 @@ $ ->
     getLanguage: '/getLang'
     addDirection: '/createDirection'
     getDirection: '/getDir'
+    deleteDirection: '/delete/direction'
 
 
   defaultUserdata =
@@ -15,6 +16,7 @@ $ ->
     lastName: ''
     login: ''
     password: ''
+    role: []
     photo: ''
 
   defaultLanguageData =
@@ -212,7 +214,7 @@ $ ->
     else if (!vm.user.password())
       toastr.error("Please enter password")
       return no
-    else if (!vm.user.password())
+    else if (!vm.user.role())
       toastr.error("Please enter password")
       return no
     else if !formData
@@ -294,15 +296,14 @@ $ ->
     data =
       id: row[0].innerText
     $.ajax
-      url: '/delete/direction'
-      method: 'DELETE'
+      url: apiUrl.deleteDirection
+      type: 'DELETE'
       data: JSON.stringify(data)
       dataType: 'json'
       contentType: 'application/json'
     .fail handleError
     .done (response) ->
       toastr.success(response)
-
     $(this).parents('tr').remove()
 
   ko.applyBindings {vm}

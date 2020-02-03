@@ -39,6 +39,10 @@ $ ->
     page: Glob.page
     languageList: []
     directionList: []
+    availableValues: ko.observableArray(["value 1","value 2","value 3","value 4","value 5"]),
+    selectedValues: ko.observableArray(["value 2","value 5"]),
+    availableObjects: ko.observableArray([{id:1,name:"object 1"}, {id:2,name:"object 2"},{id:3,name: "object 3"},{id:4,name:"object 4"},{id:5,name:"object 5"}]),
+    selectedIds: ko.observableArray([2,5])
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -51,6 +55,7 @@ $ ->
       vm.page(Page.messages)
     else
       vm.page(Page.users)
+
 
 # Users Form methods coffee
 
@@ -171,9 +176,7 @@ $ ->
       type: 'GET'
     .fail handleError
     .done (response) ->
-      console.log('1: ', vm.directionList().length)
       vm.directionList(response)
-      console.log('2: ', vm.directionList().length)
 
   getDirection()
 
@@ -286,6 +289,20 @@ $ ->
         alert JSON.stringify(errMsg)
     $(this).parents('tr').remove()
 
+  $(document).on 'click', '.deleteDirection', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+    $.ajax
+      url: '/delete/direction'
+      method: 'DELETE'
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
 
+    $(this).parents('tr').remove()
 
   ko.applyBindings {vm}

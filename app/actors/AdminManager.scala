@@ -45,6 +45,8 @@ class AdminManager @Inject()(val environment: Environment,
     case GetDirection =>
       getDirection.pipeTo(sender())
 
+    case DeleteDirection(id) =>
+      deleteDirection(id).pipeTo(sender())
 
     case _ => logger.info(s"received unknown message")
   }
@@ -58,7 +60,6 @@ class AdminManager @Inject()(val environment: Environment,
       Files.write(imagesDir.resolve(filenameGenerator()), imageData)
     }
   }
-
 
   private def addDirection(directionData: Direction): Future[Int] = {
     directionDao.addDirection(Direction(None, directionData.name))
@@ -76,6 +77,9 @@ class AdminManager @Inject()(val environment: Environment,
     new Date().getTime.toString + ".png"
   }
 
+  private def deleteDirection(id: Int): Future[Int] = {
+    directionDao.deleteDirection(id)
+  }
 //  def getImage(fileId: String) = {
 //    Future {
 //      require(isCorrectFileName(fileId))

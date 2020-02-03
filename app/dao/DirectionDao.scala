@@ -30,6 +30,9 @@ trait DirectionDao {
   def addDirection(directionData: Direction): Future[Int]
 
   def getDirection: Future[Seq[Direction]]
+
+  def deleteDirection(id: Int): Future[Int]
+
 }
 
 @Singleton
@@ -54,5 +57,12 @@ class DirectionDaoImpl @Inject()(protected val dbConfigProvider: DatabaseConfigP
       direction.result
     }
   }
+
+  override def deleteDirection(id: Int): Future[Int] = {
+    db.run{
+      direction.filter(_.id === id).delete
+    }
+  }
+
 }
 

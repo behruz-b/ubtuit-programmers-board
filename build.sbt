@@ -61,4 +61,7 @@ libraryDependencies ++= akkaLibs ++ akkaHttp ++ commonDependencies ++ dbLibs ++ 
   "org.webjars" % "toastr" % "2.1.2",
   "net.ruippeixotog" %% "scala-scraper" % "2.1.0",
   "org.webjars" % "bootstrap" % "4.3.1",
-  "org.webjars" % "momentjs" % "2.8.1")
+  "org.webjars" % "bootstrap-select" % "1.13.11" % "runtime",
+  "org.webjars.bower" % "popper.js" % "1.12.9",
+  "org.webjars" % "momentjs" % "2.8.1"
+)

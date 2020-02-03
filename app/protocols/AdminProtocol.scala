@@ -12,6 +12,8 @@ object AdminProtocol {
 
   case class AddDirection(direction: Direction)
 
+  case class DeleteDirection(id: Int)
+
   case class Language(id: Option[Int] = None,
                       name: String,
                       logoName: String,

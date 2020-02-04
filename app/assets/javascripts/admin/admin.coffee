@@ -8,6 +8,10 @@ $ ->
     getLanguage: '/getLang'
     addDirection: '/createDirection'
     getDirection: '/getDir'
+    deleteDirection: '/delete/direction'
+    getRoles: '/get-roles'
+    deleteLanguage: '/delete/language'
+    updateDirection: '/update/direction'
 
 
   defaultUserdata =
@@ -15,6 +19,7 @@ $ ->
     lastName: ''
     login: ''
     password: ''
+    role: []
     photo: ''
 
   defaultLanguageData =
@@ -39,10 +44,8 @@ $ ->
     page: Glob.page
     languageList: []
     directionList: []
-    availableValues: ko.observableArray(["value 1","value 2","value 3","value 4","value 5"]),
-    selectedValues: ko.observableArray(["value 2","value 5"]),
-    availableObjects: ko.observableArray([{id:1,name:"object 1"}, {id:2,name:"object 2"},{id:3,name: "object 3"},{id:4,name:"object 4"},{id:5,name:"object 5"}]),
-    selectedIds: ko.observableArray([2,5])
+    roleList: []
+    selectedRoles: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -154,6 +157,7 @@ $ ->
     if formDataLanguage
       vm.enableSubmitButton(no)
       formDataLanguage.submit()
+      getLanguage()
     else
       $logoUploadForm.fileupload('send', {files: ''})
       return no
@@ -180,6 +184,16 @@ $ ->
 
   getDirection()
 
+  getRole = ->
+    $.ajax
+      url: apiUrl.getRoles
+      type: 'GET'
+    .fail handleError
+    .done (response) ->
+      vm.roleList(response)
+
+  getRole()
+
   vm.addDirection = ->
     toastr.clear()
     if (!vm.direction.name())
@@ -197,6 +211,8 @@ $ ->
       .fail handleError
       .done (response) ->
         toastr.success(response)
+        getDirection()
+
 
   vm.onSubmit = ->
     toastr.clear()
@@ -212,7 +228,7 @@ $ ->
     else if (!vm.user.password())
       toastr.error("Please enter password")
       return no
-    else if (!vm.user.password())
+    else if (!vm.user.role())
       toastr.error("Please enter password")
       return no
     else if !formData
@@ -247,7 +263,43 @@ $ ->
         $(this).parent('td').html $(this).val()
       $(this).parents('tr').find('.add, .edit').toggle()
 
-  # Edit row on edit button click
+  $(document).on 'click', '.addDirection', ->
+    empty = false
+    input = $(this).parents('tr').find('input[type="text"]')
+    input.each ->
+      if !$(this).val()
+        $(this).addClass 'error'
+        empty = true
+      else
+        $(this).removeClass 'error'
+      return
+    $(this).parents('tr').find('.error').first().focus()
+    if !empty
+      input.each ->
+        $(this).parent('td').html $(this).val()
+      $(this).parents('tr').find('.addDirection, .editDirection').toggle()
+
+
+# Edit row on edit button click
+  $(document).on 'click', '.editDirection', ->
+    row = $(this).closest('tr').children('td')
+    name = row[1].innerText
+    row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
+    $(this).parents('tr').find('.add, .editDirection').toggle()
+    return
+  $(document).on 'click', '.add', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+      name: row[1].innerText
+    postData = JSON.stringify(data)
+    $.ajax
+      url: '/update/direction'
+      method: 'POST'
+      data: postData
+      contentType: 'application/json'
+      success: (data) ->
+
   $(document).on 'click', '.edit', ->
     row = $(this).closest('tr').children('td')
     name = row[1].innerText
@@ -269,9 +321,6 @@ $ ->
       data: postData
       contentType: 'application/json'
       success: (data) ->
-        alert JSON.stringify(data)
-      error: (errMsg) ->
-        alert JSON.stringify(errMsg)
 
 # Delete row on delete button click
   $(document).on 'click', '.delete', ->
@@ -294,15 +343,29 @@ $ ->
     data =
       id: row[0].innerText
     $.ajax
-      url: '/delete/direction'
-      method: 'DELETE'
+      url: apiUrl.deleteDirection
+      type: 'DELETE'
       data: JSON.stringify(data)
       dataType: 'json'
       contentType: 'application/json'
     .fail handleError
     .done (response) ->
       toastr.success(response)
+    $(this).parents('tr').remove()
 
+  $(document).on 'click', '.deleteLanguage', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+    $.ajax
+      url: apiUrl.deleteLanguage
+      type: 'DELETE'
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
     $(this).parents('tr').remove()
 
   ko.applyBindings {vm}

@@ -7,8 +7,7 @@ import akka.actor.Actor
 import akka.pattern.pipe
 import akka.util.Timeout
 import com.typesafe.scalalogging.LazyLogging
-import dao.LanguageDao
-import dao.DirectionDao
+import dao.{DirectionDao, LanguageDao, RoleDao}
 import javax.inject.Inject
 import play.api.{Configuration, Environment}
 import protocols.AdminProtocol._
@@ -19,7 +18,8 @@ import scala.concurrent.{ExecutionContext, Future}
 class AdminManager @Inject()(val environment: Environment,
                              val configuration: Configuration,
                              languageDao: LanguageDao,
-                              directionDao: DirectionDao
+                             directionDao: DirectionDao,
+                             roleDao: RoleDao,
                              )
                             (implicit val ec: ExecutionContext)
   extends Actor with LazyLogging {
@@ -47,6 +47,15 @@ class AdminManager @Inject()(val environment: Environment,
 
     case DeleteDirection(id) =>
       deleteDirection(id).pipeTo(sender())
+
+    case DeleteLanguage(id) =>
+      deleteLanguage(id).pipeTo(sender())
+
+    case GetRoles =>
+      readRole.pipeTo(sender())
+
+    case UpdateDirection(data) =>
+      updateDirection(data).pipeTo(sender())
 
     case _ => logger.info(s"received unknown message")
   }
@@ -80,25 +89,17 @@ class AdminManager @Inject()(val environment: Environment,
   private def deleteDirection(id: Int): Future[Int] = {
     directionDao.deleteDirection(id)
   }
-//  def getImage(fileId: String) = {
-//    Future {
-//      require(isCorrectFileName(fileId))
-//      Files.readAllBytes(imagesDir.resolve(fileId + ".png"))
-//    }
-//  }
-//
-//  def getImages = {
-//    Future {
-//      new File(imagesDir.toString)
-//        .listFiles
-//        .filter(_.isFile)
-//        .map(_.getName.split('.')(0))
-//        .toList
-//    }
-//  }
-//  def isCorrectFileName(name: String) = {
-//    badCharsR.findFirstIn(name).isEmpty
-//  }
-//
-//  private val badCharsR = """\/|\.\.|\?|\*|:|\\""".r // / .. ? * : \
+
+  private def deleteLanguage(id: Int): Future[Int] = {
+    languageDao.deleteLanguage(id)
+  }
+
+  private def readRole: Future[Seq[Role]] = {
+    roleDao.getRoles
+  }
+
+  private def updateDirection(data: Direction): Future[Int] = {
+    directionDao.updateDirection(data)
+  }
+
 }

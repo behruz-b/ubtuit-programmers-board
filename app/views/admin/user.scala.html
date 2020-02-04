@@ -47,62 +47,60 @@
       </table>
     </div>
   </div>
-  <!-- Modal Add User -->
-<div class="modal fade" id="user-modal" role="dialog" aria-labelledby="UserTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <form id="file-upload-form" class="m-4" action="@controllers.routes.AdminController.createUser()"
-      enctype="multipart/form-data" method="post">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="firstName" >Firs Name: </label>
-            <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName" name="firstName">
+    <!-- Modal Add User -->
+  <div class="modal fade" id="user-modal" role="dialog" aria-labelledby="UserTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form id="file-upload-form" class="m-4" action="@controllers.routes.AdminController.createUser()"
+        enctype="multipart/form-data" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-user-circle fa-2x"> Add User</i></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="form-group">
-            <label for="lastName" >Last Name: </label>
-            <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName" name="lastName">
-          </div>
-          <div class="form-group">
-            <label for="login" >Login: </label>
-            <input class="form-control" type="text" id="login" data-bind="value: vm.user.login" name="login">
-          </div>
-          <div class="form-group">
-            <label for="pass" >Password: </label>
-            <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
-          </div>
-          <div class="form-group one-line-dropdown">
-              <select id="select1" multiple class="selectpicker form-control" title="Select App" data-show-subtext="true">
-                <option value="1">birinchi</option>
-                <option value="2">birinchi2</option>
-                <option value="3">birinchi3</option>
-                <option value="4">birinchi4</option>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="firstName" >Firs Name: </label>
+              <input class="form-control" type="text" id="firstName" data-bind="value: vm.user.firstName" name="firstName">
+            </div>
+            <div class="form-group">
+              <label for="lastName" >Last Name: </label>
+              <input class="form-control" type="text" id="lastName" data-bind="value: vm.user.lastName" name="lastName">
+            </div>
+            <div class="form-group">
+              <label for="login" >Login: </label>
+              <input class="form-control" type="text" id="login" data-bind="value: vm.user.login" name="login">
+            </div>
+            <div class="form-group">
+              <label for="pass" >Password: </label>
+              <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
+            </div>
+            <div class="form-group one-line-dropdown">
+              <select id="select1" multiple data-bind="foreach: vm.roleList()" class="selectpicker form-control" title="Select Role" data-show-subtext="true">
+                <option data-bind="text: $data.name, value: $data.id"></option>
               </select>
-          </div>
-          <div class="form-group">
-            <span class="btn btn-file btn-attach-image futura">
+            </div>
+            <div class="form-group">
+              <span class="btn btn-file btn-attach-image futura">
               Attach image<input type="file" name="attachedFile"/>
             </span>
-            <span id="file-name"></span>
+              <span id="file-name"></span>
+            </div>
+            <div id="progress">
+              <div class="bar" style="width: 0%;"></div>
+            </div>
           </div>
-          <div id="progress">
-            <div class="bar" style="width: 0%;"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
+            Close</i>
+            </button>
+            <button class="btn btn-success futura" type="submit" data-bind="click: vm.onSubmit, enable: vm.enableSubmitButton">
+              <i class="fas fa-user-check"> Add User</i></button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times-circle">
-            Close</i></button>
-          <button class="btn btn-success futura" type="submit"  data-bind="click: vm.onSubmit, enable: vm.enableSubmitButton">
-            <i class="fas fa-user-check"> Add User</i></button>
-        </div>
-      </form>
+        </form>
 
+      </div>
     </div>
   </div>
-</div>
 </div>

@@ -11,7 +11,7 @@ import org.webjars.play.WebJarsUtil
 import play.api.libs.Files.TemporaryFile
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
-import protocols.AdminProtocol.{AddDirection, AddImage, AddLanguage, Direction, GetDirection, GetLanguage, Language, DeleteDirection}
+import protocols.AdminProtocol._
 import views.html.admin._
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -72,16 +72,23 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }
   }
 
-  def createDirection = Action.async(parse.json){ implicit request =>
+  def getRoles = Action.async {
+    (adminManager ? GetRoles).mapTo[Seq[Role]].map{ role =>
+      Ok(Json.toJson(role))
+    }
+  }
+
+  def createDirection = Action.async(parse.json){ implicit request => {
     val name = (request.body \ "name").as[String]
     logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
       Ok(Json.toJson(id))
     }
   }
+  }
 
-  def deleteDirection = Action.async(parse.json) { implicit request =>
-    val id = (request.body \ "id").as[Int]
+  def deleteDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
     logger.warn(s"keldi")
     (adminManager ? DeleteDirection(id)).mapTo[Int].map{ i =>
       if (i != 0){
@@ -92,12 +99,42 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
       }
     }
   }
+  }
+
+  def deleteLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
+    logger.warn(s"keldi")
+    (adminManager ? DeleteLanguage(id)).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism o`chirildi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
+    }
+  }
+  }
 
   private def uploadFile(filename: String, content: Array[Byte]) {
       (adminManager ? AddImage(filename, content)).mapTo[Unit].map { _ =>
         Ok(Json.toJson("Successfully uploaded"))
       }
   }
+
+  def updateDirection = Action.async(parse.json) { implicit request =>
+    val id = (request.body \ "id").as[Int]
+    val name = (request.body \ "name").as[String]
+    logger.warn(s"update directionga keldi")
+    (adminManager ? UpdateDirection(Direction(Some(id), name))).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism yangilandi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
+    }
+  }
+
 
   private def getBytesFromPath(filePath: Path): Array[Byte] = {
     Files.readAllBytes(filePath)

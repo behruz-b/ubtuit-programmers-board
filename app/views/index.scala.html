@@ -1,9 +1,10 @@
 @this(webJarsUtil: org.webjars.play.WebJarsUtil)
 @()
 @import views.html.main
+@import views.html.contactUs
 @main("Home Page", webJarsUtil) {
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/index/index.css")">
-
+  <script src="@routes.Assets.versioned("javascripts/admin/admin.js")" type="text/javascript"></script>
   <nav class="navbar navbar-expand-sm navbar-light py-3">
         <div class="container mx-5">
           <a href="index.scala.html" class="navbar-brand"><strong>Scala Coders Team</strong></a>
@@ -30,14 +31,12 @@
               <li class="nav-item">
                 <a href="#" class="nav-link">SERVICES</a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">CONTACT</a>
-              </li>
             </ul>
           </div>
           <i class="fas fa-search ml-3" style="border-left: 2px #777 solid; padding-left: 10px;"></i>
         </div>
       </nav>
+
       <div class="content text-white text-center">
         <div class="container">
           <h1>Welcome to Scala Coders Team Project</h1>
@@ -283,7 +282,9 @@
             </div>
           </div>
         </div>
+        @contactUs()
       </div>
+
       <footer class="footer">
         <p>Scala Coders Team &copy 2020 All Right Reserved</p>
       </footer>

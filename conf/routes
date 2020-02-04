@@ -10,6 +10,7 @@ GET     /getDir                     @controllers.AdminController.getDirection
 POST    /createDirection            @controllers.AdminController.createDirection
 DELETE  /delete/direction           @controllers.AdminController.deleteDirection
 GET     /get-roles                  @controllers.AdminController.getRoles
+DELETE  /delete/language            @controllers.AdminController.deleteLanguage
 # End AdminController
 # ----------------------------------------------------------------------- #
 # Begin AuthController

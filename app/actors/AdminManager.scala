@@ -48,6 +48,9 @@ class AdminManager @Inject()(val environment: Environment,
     case DeleteDirection(id) =>
       deleteDirection(id).pipeTo(sender())
 
+    case DeleteLanguage(id) =>
+      deleteLanguage(id).pipeTo(sender())
+
     case GetRoles =>
       readRole.pipeTo(sender())
 
@@ -82,6 +85,10 @@ class AdminManager @Inject()(val environment: Environment,
 
   private def deleteDirection(id: Int): Future[Int] = {
     directionDao.deleteDirection(id)
+  }
+
+  private def deleteLanguage(id: Int): Future[Int] = {
+    languageDao.deleteLanguage(id)
   }
 
   private def readRole: Future[Seq[Role]] = {

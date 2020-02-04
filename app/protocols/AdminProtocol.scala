@@ -16,6 +16,8 @@ object AdminProtocol {
 
   case class DeleteDirection(id: Int)
 
+  case class DeleteLanguage(id: Int)
+
   case class Language(id: Option[Int] = None,
                       name: String,
                       logoName: String

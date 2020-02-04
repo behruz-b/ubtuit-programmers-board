@@ -101,6 +101,20 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   }
   }
 
+  def deleteLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
+    logger.warn(s"keldi")
+    (adminManager ? DeleteLanguage(id)).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism o`chirildi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
+    }
+  }
+  }
+
   private def uploadFile(filename: String, content: Array[Byte]) {
       (adminManager ? AddImage(filename, content)).mapTo[Unit].map { _ =>
         Ok(Json.toJson("Successfully uploaded"))

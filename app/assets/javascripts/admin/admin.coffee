@@ -10,6 +10,7 @@ $ ->
     getDirection: '/getDir'
     deleteDirection: '/delete/direction'
     getRoles: '/get-roles'
+    deleteLanguage: 'delete/language'
 
 
   defaultUserdata =
@@ -309,6 +310,21 @@ $ ->
       id: row[0].innerText
     $.ajax
       url: apiUrl.deleteDirection
+      type: 'DELETE'
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
+    $(this).parents('tr').remove()
+
+  $(document).on 'click', '.deleteLanguage', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+    $.ajax
+      url: apiUrl.deleteLanguage
       type: 'DELETE'
       data: JSON.stringify(data)
       dataType: 'json'

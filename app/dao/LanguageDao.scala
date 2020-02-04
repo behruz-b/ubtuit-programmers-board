@@ -34,6 +34,9 @@ trait LanguageDao {
   def getLanguages: Future[Seq[Language]]
 
   def deleteLanguage(id: Int): Future[Int]
+
+  def findLanguageById(id: Int): Future[Option[Language]]
+
 }
 
 @Singleton
@@ -65,5 +68,10 @@ class LanguageDaoImpl @Inject()(protected val dbConfigProvider: DatabaseConfigPr
     }
   }
 
+  override def findLanguageById(id: Int): Future[Option[Language]] = {
+    db.run {
+      language.filter(_.id === id).result.headOption
+    }
+  }
 }
 

@@ -20,7 +20,7 @@ class AdminManager @Inject()(val environment: Environment,
                              languageDao: LanguageDao,
                              directionDao: DirectionDao,
                              roleDao: RoleDao,
-                             )
+                            )
                             (implicit val ec: ExecutionContext)
   extends Actor with LazyLogging {
 
@@ -64,7 +64,7 @@ class AdminManager @Inject()(val environment: Environment,
     languageDao.addLanguage(Language(None, languageData.name, filenameGenerator()))
   }
 
-  def addImage(filename: String, imageData: Array[Byte]): Future[Unit]  = {
+  def addImage(filename: String, imageData: Array[Byte]): Future[Unit] = {
     Future {
       Files.write(imagesDir.resolve(filenameGenerator()), imageData)
     }
@@ -91,6 +91,14 @@ class AdminManager @Inject()(val environment: Environment,
   }
 
   private def deleteLanguage(id: Int): Future[Int] = {
+    for {
+      language <- languageDao.findLanguageById(id)
+    } yield language match {
+      case Some(language) =>
+        Files.delete(imagesDir.resolve(language.logoName))
+      case None =>
+
+    }
     languageDao.deleteLanguage(id)
   }
 

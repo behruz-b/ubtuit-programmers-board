@@ -11,6 +11,7 @@ $ ->
     deleteDirection: '/delete/direction'
     getRoles: '/get-roles'
     deleteLanguage: 'delete/language'
+    updateDirection: 'update/direction'
 
 
   defaultUserdata =
@@ -263,6 +264,28 @@ $ ->
       $(this).parents('tr').find('.add, .edit').toggle()
 
   # Edit row on edit button click
+  $(document).on 'click', '.editDirection', ->
+    row = $(this).closest('tr').children('td')
+    name = row[1].innerText
+    row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
+    $(this).parents('tr').find('.addDirection, .editDirection').toggle()
+    return
+  $(document).on 'click', '.addDirection', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+      name: row[1].innerText
+    postData = JSON.stringify(data)
+    $.ajax
+      url: '/update/direction'
+      method: 'POST'
+      data: postData
+      contentType: 'application/json'
+      success: (data) ->
+        alert JSON.stringify(data)
+      error: (errMsg) ->
+        alert JSON.stringify(errMsg)
+
   $(document).on 'click', '.edit', ->
     row = $(this).closest('tr').children('td')
     name = row[1].innerText
@@ -284,9 +307,6 @@ $ ->
       data: postData
       contentType: 'application/json'
       success: (data) ->
-        alert JSON.stringify(data)
-      error: (errMsg) ->
-        alert JSON.stringify(errMsg)
 
 # Delete row on delete button click
   $(document).on 'click', '.delete', ->

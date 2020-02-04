@@ -54,6 +54,9 @@ class AdminManager @Inject()(val environment: Environment,
     case GetRoles =>
       readRole.pipeTo(sender())
 
+    case UpdateDirection(data) =>
+      updateDirection(data).pipeTo(sender())
+
     case _ => logger.info(s"received unknown message")
   }
 
@@ -95,5 +98,8 @@ class AdminManager @Inject()(val environment: Environment,
     roleDao.getRoles
   }
 
+  private def updateDirection(data: Direction): Future[Int] = {
+    directionDao.updateDirection(data)
+  }
 
 }

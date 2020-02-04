@@ -11,6 +11,7 @@ POST    /createDirection            @controllers.AdminController.createDirection
 DELETE  /delete/direction           @controllers.AdminController.deleteDirection
 GET     /get-roles                  @controllers.AdminController.getRoles
 DELETE  /delete/language            @controllers.AdminController.deleteLanguage
+POST    /update/direction           @controllers.AdminController.updateDirection
 # End AdminController
 # ----------------------------------------------------------------------- #
 # Begin AuthController

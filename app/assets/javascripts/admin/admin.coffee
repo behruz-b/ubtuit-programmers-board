@@ -10,8 +10,8 @@ $ ->
     getDirection: '/getDir'
     deleteDirection: '/delete/direction'
     getRoles: '/get-roles'
-    deleteLanguage: 'delete/language'
-    updateDirection: 'update/direction'
+    deleteLanguage: '/delete/language'
+    updateDirection: '/update/direction'
 
 
   defaultUserdata =
@@ -263,14 +263,31 @@ $ ->
         $(this).parent('td').html $(this).val()
       $(this).parents('tr').find('.add, .edit').toggle()
 
-  # Edit row on edit button click
+  $(document).on 'click', '.addDirection', ->
+    empty = false
+    input = $(this).parents('tr').find('input[type="text"]')
+    input.each ->
+      if !$(this).val()
+        $(this).addClass 'error'
+        empty = true
+      else
+        $(this).removeClass 'error'
+      return
+    $(this).parents('tr').find('.error').first().focus()
+    if !empty
+      input.each ->
+        $(this).parent('td').html $(this).val()
+      $(this).parents('tr').find('.addDirection, .editDirection').toggle()
+
+
+# Edit row on edit button click
   $(document).on 'click', '.editDirection', ->
     row = $(this).closest('tr').children('td')
     name = row[1].innerText
     row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
-    $(this).parents('tr').find('.addDirection, .editDirection').toggle()
+    $(this).parents('tr').find('.add, .editDirection').toggle()
     return
-  $(document).on 'click', '.addDirection', ->
+  $(document).on 'click', '.add', ->
     row = $(this).closest('tr').children('td')
     data =
       id: row[0].innerText
@@ -282,9 +299,6 @@ $ ->
       data: postData
       contentType: 'application/json'
       success: (data) ->
-        alert JSON.stringify(data)
-      error: (errMsg) ->
-        alert JSON.stringify(errMsg)
 
   $(document).on 'click', '.edit', ->
     row = $(this).closest('tr').children('td')

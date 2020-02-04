@@ -256,7 +256,6 @@ $ ->
         empty = true
       else
         $(this).removeClass 'error'
-      return
     $(this).parents('tr').find('.error').first().focus()
     if !empty
       input.each ->
@@ -272,7 +271,6 @@ $ ->
         empty = true
       else
         $(this).removeClass 'error'
-      return
     $(this).parents('tr').find('.error').first().focus()
     if !empty
       input.each ->
@@ -285,20 +283,23 @@ $ ->
     row = $(this).closest('tr').children('td')
     name = row[1].innerText
     row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
-    $(this).parents('tr').find('.add, .editDirection').toggle()
-    return
-  $(document).on 'click', '.add', ->
+    $(this).parents('tr').find('.addDirection, .editDirection').toggle()
+
+  $(document).on 'click', '.addDirection', ->
     row = $(this).closest('tr').children('td')
     data =
       id: row[0].innerText
       name: row[1].innerText
-    postData = JSON.stringify(data)
+    console.log(data)
     $.ajax
-      url: '/update/direction'
-      method: 'POST'
-      data: postData
+      url: apiUrl.updateDirection
+      type: 'POST'
+      data: JSON.stringify(data)
+      dataType: 'json'
       contentType: 'application/json'
-      success: (data) ->
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
 
   $(document).on 'click', '.edit', ->
     row = $(this).closest('tr').children('td')
@@ -307,7 +308,7 @@ $ ->
     row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
     row[2].innerHTML = '<input type="text" class="form-control" value="' + direction + '">'
     $(this).parents('tr').find('.add, .edit').toggle()
-    return
+
   $(document).on 'click', '.add', ->
     row = $(this).closest('tr').children('td')
     data =
@@ -317,25 +318,28 @@ $ ->
     postData = JSON.stringify(data)
     $.ajax
       url: '/update/group'
-      method: 'POST'
-      data: postData
+      typr: 'POST'
+      data: JSON.stringify(data)
+      dataType: 'json'
       contentType: 'application/json'
-      success: (data) ->
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
 
-# Delete row on delete button click
+  # Delete row on delete button click
   $(document).on 'click', '.delete', ->
     row = $(this).closest('tr').children('td')
     data = id: row[0].innerText
     postData = JSON.stringify(data)
     $.ajax
-      url: '/delete/group'
-      method: 'POST'
-      data: postData
+      url: '/update/group'
+      typr: 'POST'
+      data: JSON.stringify(data)
+      dataType: 'json'
       contentType: 'application/json'
-      success: (data) ->
-        alert JSON.stringify(data)
-      error: (errMsg) ->
-        alert JSON.stringify(errMsg)
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
     $(this).parents('tr').remove()
 
   $(document).on 'click', '.deleteDirection', ->

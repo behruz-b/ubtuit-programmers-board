@@ -36,11 +36,9 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def createUser(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
     val firstName = body("firstName").head
-    logger.warn(s"name: $firstName")
     request.body.file("attachedFile").map { tempFile =>
       val fileName = tempFile.filename
       val imgData = getBytesFromPath(tempFile.ref.path)
-      logger.warn(s"name: $fileName")
       Future.successful(Ok("OK"))
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }
@@ -82,7 +80,6 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def createDirection = Action.async(parse.json) { implicit request => {
     val name = (request.body \ "name").as[String]
-    logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
       Ok(Json.toJson(id))
     }
@@ -91,7 +88,6 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def deleteDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
     val id = (request.body \ "id").as[String].toInt
-    logger.warn(s"keldi")
     (adminManager ? DeleteDirection(id)).mapTo[Int].map { i =>
       if (i != 0) {
         Ok(Json.toJson(id + " raqamli ism o`chirildi"))
@@ -105,7 +101,6 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def deleteLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
     val id = (request.body \ "id").as[String].toInt
-    logger.warn(s"keldi")
     (adminManager ? DeleteLanguage(id)).mapTo[Int].map { i =>
       if (i != 0) {
         Ok(Json.toJson(id + " raqamli ism o`chirildi"))
@@ -123,10 +118,9 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     }
   }
 
-  def updateDirection = Action.async(parse.json) { implicit request =>
-    val id = (request.body \ "id").as[Int]
+  def updateDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
     val name = (request.body \ "name").as[String]
-    logger.warn(s"update directionga keldi")
     (adminManager ? UpdateDirection(Direction(Some(id), name))).mapTo[Int].map{ i =>
       if (i != 0){
         Ok(Json.toJson(id + " raqamli ism yangilandi"))
@@ -135,6 +129,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
         Ok("Bunday raqamli ism topilmadi")
       }
     }
+  }
   }
 
 

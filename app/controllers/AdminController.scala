@@ -126,6 +126,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def updateDirection = Action.async(parse.json) { implicit request =>
     val id = (request.body \ "id").as[Int]
     val name = (request.body \ "name").as[String]
+    logger.warn(s"update directionga keldi")
     (adminManager ? UpdateDirection(Direction(Some(id), name))).mapTo[Int].map{ i =>
       if (i != 0){
         Ok(Json.toJson(id + " raqamli ism yangilandi"))

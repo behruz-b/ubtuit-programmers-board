@@ -20,7 +20,7 @@ $ ->
     lastName: ''
     login: ''
     password: ''
-    role: []
+    selectedRoles: []
     photo: ''
 
   defaultLanguageData =
@@ -46,7 +46,6 @@ $ ->
     languageList: []
     directionList: []
     roleList: []
-    selectedRoles: []
 
   vm.selectedPage = (page) ->
     if (page is Page.leaders)
@@ -230,7 +229,7 @@ $ ->
     else if (!vm.user.password())
       toastr.error("Please enter password")
       return no
-    else if (!vm.user.role())
+    else if (!vm.user.selectedRoles())
       toastr.error("Please enter password")
       return no
     else if !formData

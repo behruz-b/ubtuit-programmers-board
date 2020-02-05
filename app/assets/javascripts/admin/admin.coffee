@@ -12,6 +12,7 @@ $ ->
     getRoles: '/get-roles'
     deleteLanguage: '/delete/language'
     updateDirection: '/update/direction'
+    updateLanguage: '/update/language'
 
 
   defaultUserdata =
@@ -294,6 +295,28 @@ $ ->
     console.log(data)
     $.ajax
       url: apiUrl.updateDirection
+      type: 'POST'
+      data: JSON.stringify(data)
+      dataType: 'json'
+      contentType: 'application/json'
+    .fail handleError
+    .done (response) ->
+      toastr.success(response)
+
+  $(document).on 'click', '.editLanguage', ->
+    row = $(this).closest('tr').children('td')
+    name = row[1].innerText
+    row[1].innerHTML = '<input type="text" class="form-control" value="' + name + '">'
+    $(this).parents('tr').find('.addLanguage, .editLanguage').toggle()
+
+  $(document).on 'click', '.addLanguage', ->
+    row = $(this).closest('tr').children('td')
+    data =
+      id: row[0].innerText
+      name: row[1].innerText
+    console.log(data)
+    $.ajax
+      url: apiUrl.updateLanguage
       type: 'POST'
       data: JSON.stringify(data)
       dataType: 'json'

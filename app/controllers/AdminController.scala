@@ -138,6 +138,21 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   }
   }
 
+  def updateLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
+    val name = (request.body \ "name").as[String]
+    val logoName = (request.body \ "logoName").as[String]
+    (adminManager ? UpdateLanguage(Language(Some(id), name, logoName))).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism yangilandi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
+    }
+  }
+  }
+
 
   private def getBytesFromPath(filePath: Path): Array[Byte] = {
     Files.readAllBytes(filePath)

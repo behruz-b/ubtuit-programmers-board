@@ -20,6 +20,8 @@ object AdminProtocol {
 
   case class UpdateDirection(updateDirection: Direction)
 
+  case class UpdateLanguage(updateLanguage: Language)
+
   case class Language(id: Option[Int] = None,
                       name: String,
                       logoName: String

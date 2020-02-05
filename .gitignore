@@ -2,6 +2,7 @@ logs/application.log
 project
 project/target/
 target/
+public/upload-files
 tmp
 .history
 dist

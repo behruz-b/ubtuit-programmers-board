@@ -77,8 +77,8 @@
               <input class="form-control" type="text" id="pass" data-bind="value: vm.user.password" name="password">
             </div>
             <div class="form-group one-line-dropdown">
-              <select id="select1" multiple data-bind="foreach: vm.roleList()" class="selectpicker form-control" title="Select Role" data-show-subtext="true">
-                <option data-bind="text: $data.name, value: $data.id"></option>
+              <select multiple name="roles" class="custom-select selectpicker form-control" data-bind="options: vm.roleList(), optionsText: 'name',
+                optionsValue: 'id', value: vm.user.selectedRoles, optionsCaption: 'Select Role' " data-show-subtext="true">
               </select>
             </div>
             <div class="form-group">

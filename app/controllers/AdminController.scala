@@ -37,6 +37,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def createUser(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
     val firstName = body("firstName").head
+    logger.warn(s"body: $body")
     request.body.file("attachedFile").map { tempFile =>
       val fileName = tempFile.filename
       val imgData = getBytesFromPath(tempFile.ref.path)

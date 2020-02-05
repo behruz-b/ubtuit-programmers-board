@@ -61,12 +61,12 @@ class AdminManager @Inject()(val environment: Environment,
   }
 
   private def addLanguage(languageData: Language): Future[Int] = {
-    languageDao.addLanguage(Language(None, languageData.name, filenameGenerator()))
+    languageDao.addLanguage(Language(None, languageData.name, languageData.logoName))
   }
 
   def addImage(filename: String, imageData: Array[Byte]): Future[Unit] = {
     Future {
-      Files.write(imagesDir.resolve(filenameGenerator()), imageData)
+      Files.write(imagesDir.resolve(filename), imageData)
     }
   }
 
@@ -82,9 +82,7 @@ class AdminManager @Inject()(val environment: Environment,
     directionDao.getDirection
   }
 
-  private def filenameGenerator() = {
-    new Date().getTime.toString + ".png"
-  }
+
 
   private def deleteDirection(id: Int): Future[Int] = {
     directionDao.deleteDirection(id)

@@ -130,6 +130,8 @@ $ ->
     done: (e, data) ->
       result = data.result
       if result is 'OK'
+        getLanguage()
+        $('#closeModalLanguage').click()
         toastr.success('Form has been successfully submitted!')
         ko.mapping.fromJS(defaultLanguageData, {}, vm.language)
       else
@@ -157,7 +159,6 @@ $ ->
     if formDataLanguage
       vm.enableSubmitButton(no)
       formDataLanguage.submit()
-      getLanguage()
     else
       $logoUploadForm.fileupload('send', {files: ''})
       return no

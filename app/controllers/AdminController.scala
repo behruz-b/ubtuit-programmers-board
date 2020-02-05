@@ -1,6 +1,7 @@
 package controllers
 
 import java.nio.file.{Files, Path}
+import java.util.Date
 
 import akka.actor.ActorRef
 import akka.pattern.ask
@@ -48,16 +49,21 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
     val body = request.body.asFormUrlEncoded
     val name = body("languageName").head
     request.body.file("attachedLogo").map { tempLogo =>
-      val logoName = tempLogo.filename
+      val logoName = filenameGenerator()
       val imgData = getBytesFromPath(tempLogo.ref.path)
-      (adminManager ? AddImage(logoName, imgData)).mapTo[Unit].map { _ =>
-        Ok(Json.toJson("Successfully uploaded"))
-      }
-      (adminManager ? AddLanguage(Language(None, name, logoName))).mapTo[Int].map { id =>
+      val result = (for {
+        _ <- (adminManager ? AddImage(logoName, imgData)).mapTo[Unit]
+        result <- (adminManager ? AddLanguage(Language(None, name, logoName))).mapTo[Int]
+      } yield result)
+      result.map{ a =>
         Ok("OK")
       }
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }
+  }
+
+  private def filenameGenerator() = {
+    new Date().getTime.toString + ".png"
   }
 
   def getLanguage = Action.async {

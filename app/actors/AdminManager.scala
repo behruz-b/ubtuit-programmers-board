@@ -20,7 +20,7 @@ class AdminManager @Inject()(val environment: Environment,
                              languageDao: LanguageDao,
                              directionDao: DirectionDao,
                              roleDao: RoleDao,
-                             )
+                            )
                             (implicit val ec: ExecutionContext)
   extends Actor with LazyLogging {
 
@@ -57,16 +57,19 @@ class AdminManager @Inject()(val environment: Environment,
     case UpdateDirection(data) =>
       updateDirection(data).pipeTo(sender())
 
+    case UpdateLanguage(data) =>
+      updateLanguage(data).pipeTo(sender())
+
     case _ => logger.info(s"received unknown message")
   }
 
   private def addLanguage(languageData: Language): Future[Int] = {
-    languageDao.addLanguage(Language(None, languageData.name, filenameGenerator()))
+    languageDao.addLanguage(Language(None, languageData.name, languageData.logoName))
   }
 
-  def addImage(filename: String, imageData: Array[Byte]): Future[Unit]  = {
+  def addImage(filename: String, imageData: Array[Byte]): Future[Unit] = {
     Future {
-      Files.write(imagesDir.resolve(filenameGenerator()), imageData)
+      Files.write(imagesDir.resolve(filename), imageData)
     }
   }
 
@@ -82,15 +85,21 @@ class AdminManager @Inject()(val environment: Environment,
     directionDao.getDirection
   }
 
-  private def filenameGenerator() = {
-    new Date().getTime.toString + ".png"
-  }
+
 
   private def deleteDirection(id: Int): Future[Int] = {
     directionDao.deleteDirection(id)
   }
 
   private def deleteLanguage(id: Int): Future[Int] = {
+    for {
+      language <- languageDao.findLanguageById(id)
+    } yield language match {
+      case Some(language) =>
+        Files.delete(imagesDir.resolve(language.logoName))
+      case None =>
+
+    }
     languageDao.deleteLanguage(id)
   }
 
@@ -100,6 +109,10 @@ class AdminManager @Inject()(val environment: Environment,
 
   private def updateDirection(data: Direction): Future[Int] = {
     directionDao.updateDirection(data)
+  }
+
+  private def updateLanguage(data: Language): Future[Int] = {
+    languageDao.updateLanguage(data)
   }
 
 }

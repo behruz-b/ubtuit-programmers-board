@@ -1,6 +1,7 @@
 package controllers
 
 import java.nio.file.{Files, Path}
+import java.util.Date
 
 import akka.actor.ActorRef
 import akka.pattern.ask
@@ -14,8 +15,8 @@ import play.api.mvc._
 import protocols.AdminProtocol._
 import views.html.admin._
 
-import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration.DurationInt
+import scala.concurrent.{ExecutionContext, Future}
 
 
 @Singleton
@@ -23,7 +24,7 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
                                 implicit val webJarsUtil: WebJarsUtil,
                                 @Named("admin-manager") val adminManager: ActorRef,
                                 indexTemplate: index,
-                              )
+                               )
                                (implicit val ec: ExecutionContext)
   extends BaseController with LazyLogging {
 
@@ -32,55 +33,59 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   def index = Action {
     Ok(indexTemplate(Some("leaders")))
   }
+
   def createUser(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
     val firstName = body("firstName").head
-    logger.warn(s"name: $firstName")
     request.body.file("attachedFile").map { tempFile =>
       val fileName = tempFile.filename
       val imgData = getBytesFromPath(tempFile.ref.path)
-      logger.warn(s"name: $fileName")
       Future.successful(Ok("OK"))
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
-  }}
+  }
+  }
 
   def createLanguage(): Action[MultipartFormData[TemporaryFile]] = Action.async(parse.multipartFormData) { implicit request: Request[MultipartFormData[TemporaryFile]] => {
     val body = request.body.asFormUrlEncoded
     val name = body("languageName").head
-    logger.warn(s"name: $name")
     request.body.file("attachedLogo").map { tempLogo =>
-      val logoName = tempLogo.filename
+      val logoName = filenameGenerator()
       val imgData = getBytesFromPath(tempLogo.ref.path)
-      logger.warn(s"name: $logoName")
-      uploadFile(logoName, imgData)
-      (adminManager ? AddLanguage(Language(None, name, logoName))).mapTo[Int].map{ id =>
+      val result = (for {
+        _ <- (adminManager ? AddImage(logoName, imgData)).mapTo[Unit]
+        result <- (adminManager ? AddLanguage(Language(None, name, logoName))).mapTo[Int]
+      } yield result)
+      result.map{ a =>
         Ok("OK")
       }
     }.getOrElse(Future.successful(BadRequest("Error occurred. Please try again")))
   }
   }
 
-  def getLanguage= Action.async {
-    (adminManager ? GetLanguage).mapTo[Seq[Language]].map{lang =>
+  private def filenameGenerator() = {
+    new Date().getTime.toString + ".png"
+  }
+
+  def getLanguage = Action.async {
+    (adminManager ? GetLanguage).mapTo[Seq[Language]].map { lang =>
       Ok(Json.toJson(lang))
     }
   }
 
-  def getDirection= Action.async {
-    (adminManager ? GetDirection).mapTo[Seq[Direction]].map{dir =>
+  def getDirection = Action.async {
+    (adminManager ? GetDirection).mapTo[Seq[Direction]].map { dir =>
       Ok(Json.toJson(dir))
     }
   }
 
   def getRoles = Action.async {
-    (adminManager ? GetRoles).mapTo[Seq[Role]].map{ role =>
+    (adminManager ? GetRoles).mapTo[Seq[Role]].map { role =>
       Ok(Json.toJson(role))
     }
   }
 
-  def createDirection = Action.async(parse.json){ implicit request => {
+  def createDirection = Action.async(parse.json) { implicit request => {
     val name = (request.body \ "name").as[String]
-    logger.warn(s"controllerga keldi")
     (adminManager ? AddDirection(Direction(None, name))).mapTo[Int].map { id =>
       Ok(Json.toJson(id))
     }
@@ -89,9 +94,8 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def deleteDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
     val id = (request.body \ "id").as[String].toInt
-    logger.warn(s"keldi")
-    (adminManager ? DeleteDirection(id)).mapTo[Int].map{ i =>
-      if (i != 0){
+    (adminManager ? DeleteDirection(id)).mapTo[Int].map { i =>
+      if (i != 0) {
         Ok(Json.toJson(id + " raqamli ism o`chirildi"))
       }
       else {
@@ -103,9 +107,8 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
 
   def deleteLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
     val id = (request.body \ "id").as[String].toInt
-    logger.warn(s"keldi")
-    (adminManager ? DeleteLanguage(id)).mapTo[Int].map{ i =>
-      if (i != 0){
+    (adminManager ? DeleteLanguage(id)).mapTo[Int].map { i =>
+      if (i != 0) {
         Ok(Json.toJson(id + " raqamli ism o`chirildi"))
       }
       else {
@@ -116,15 +119,14 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
   }
 
   private def uploadFile(filename: String, content: Array[Byte]) {
-      (adminManager ? AddImage(filename, content)).mapTo[Unit].map { _ =>
-        Ok(Json.toJson("Successfully uploaded"))
-      }
+    (adminManager ? AddImage(filename, content)).mapTo[Unit].map { _ =>
+      Ok(Json.toJson("Successfully uploaded"))
+    }
   }
 
-  def updateDirection = Action.async(parse.json) { implicit request =>
-    val id = (request.body \ "id").as[Int]
+  def updateDirection: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
     val name = (request.body \ "name").as[String]
-    logger.warn(s"update directionga keldi")
     (adminManager ? UpdateDirection(Direction(Some(id), name))).mapTo[Int].map{ i =>
       if (i != 0){
         Ok(Json.toJson(id + " raqamli ism yangilandi"))
@@ -133,6 +135,22 @@ class AdminController @Inject()(val controllerComponents: ControllerComponents,
         Ok("Bunday raqamli ism topilmadi")
       }
     }
+  }
+  }
+
+  def updateLanguage: Action[JsValue] = Action.async(parse.json) { implicit request => {
+    val id = (request.body \ "id").as[String].toInt
+    val name = (request.body \ "name").as[String]
+    val logoName = (request.body \ "logoName").as[String]
+    (adminManager ? UpdateLanguage(Language(Some(id), name, logoName))).mapTo[Int].map{ i =>
+      if (i != 0){
+        Ok(Json.toJson(id + " raqamli ism yangilandi"))
+      }
+      else {
+        Ok("Bunday raqamli ism topilmadi")
+      }
+    }
+  }
   }
 
 

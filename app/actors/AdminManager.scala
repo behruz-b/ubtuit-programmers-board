@@ -57,6 +57,9 @@ class AdminManager @Inject()(val environment: Environment,
     case UpdateDirection(data) =>
       updateDirection(data).pipeTo(sender())
 
+    case UpdateLanguage(data) =>
+      updateLanguage(data).pipeTo(sender())
+
     case _ => logger.info(s"received unknown message")
   }
 
@@ -106,6 +109,10 @@ class AdminManager @Inject()(val environment: Environment,
 
   private def updateDirection(data: Direction): Future[Int] = {
     directionDao.updateDirection(data)
+  }
+
+  private def updateLanguage(data: Language): Future[Int] = {
+    languageDao.updateLanguage(data)
   }
 
 }

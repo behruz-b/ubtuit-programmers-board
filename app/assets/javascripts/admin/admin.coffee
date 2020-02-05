@@ -278,6 +278,21 @@ $ ->
         $(this).parent('td').html $(this).val()
       $(this).parents('tr').find('.addDirection, .editDirection').toggle()
 
+  $(document).on 'click', '.addLanguage', ->
+    empty = false
+    input = $(this).parents('tr').find('input[type="text"]')
+    input.each ->
+      if !$(this).val()
+        $(this).addClass 'error'
+        empty = true
+      else
+        $(this).removeClass 'error'
+    $(this).parents('tr').find('.error').first().focus()
+    if !empty
+      input.each ->
+        $(this).parent('td').html $(this).val()
+      $(this).parents('tr').find('.addLanguage, .editLanguage').toggle()
+
 
 # Edit row on edit button click
   $(document).on 'click', '.editDirection', ->
@@ -341,7 +356,7 @@ $ ->
     postData = JSON.stringify(data)
     $.ajax
       url: '/update/group'
-      typr: 'POST'
+      type: 'POST'
       data: JSON.stringify(data)
       dataType: 'json'
       contentType: 'application/json'
@@ -356,7 +371,7 @@ $ ->
     postData = JSON.stringify(data)
     $.ajax
       url: '/update/group'
-      typr: 'POST'
+      type: 'POST'
       data: JSON.stringify(data)
       dataType: 'json'
       contentType: 'application/json'
